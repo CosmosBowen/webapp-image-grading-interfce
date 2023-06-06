@@ -30,7 +30,7 @@ const root = createRoot(document.getElementById(ID_NAMES.APP_ROOT) as HTMLElemen
 
 // TODO if testing locally, you can add dontFetchSession to skip the authn request
 root.render(
-  <AppWrapper appSettings={myappSettings} includeNavbar displaySpinner ignoreHashChange>
+  <AppWrapper appSettings={myappSettings} includeNavbar displaySpinner ignoreHashChange dontFetchSession>
     <MyApp />
   </AppWrapper>
 );
