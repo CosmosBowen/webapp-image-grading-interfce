@@ -1,0 +1,15 @@
+{
+    "catalog": {},
+    "schema": {
+        "name": "product-edit-btn",
+        "createNew": true,
+        "path": "test/e2e/data_setup/schema/record/product-edit-btn.json"
+    },
+    "tables": {
+        "createNew": true
+    },
+    "entities": {
+        "createNew": true,
+        "path": "test/e2e/data_setup/data/product"
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "ermrestjs",
+  "description": "ERMrest client library in JavaScript",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "main": "build/ermrest.min.js",
+  "scripts": {
+    "build": "make dist",
+    "pretest": "make dist && make deploy",
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/informatics-isi-edu/ermrestjs.git"
+  },
+  "keywords": [
+    "database",
+    "rest",
+    "postgresql",
+    "library"
+  ],
+  "dependencies": {
+    "jsdoc-to-markdown": "8.0.0",
+    "jshint": "2.13.4",
+    "uglify-js": "3.9.2"
+  },
+  "devDependencies": {
+    "@isrd-isi-edu/ermrest-data-utils": "0.0.2",
+    "axios": "0.25.0",
+    "buffer-slice": "0.0.1",
+    "file-api": "^0.10.4",
+    "handlebars": "4.7.7",
+    "jasmine": "2.5.3",
+    "jasmine-expect": "3.7.1",
+    "jasmine-spec-reporter": "2.5.0",
+    "lz-string": "1.4.4",
+    "markdown-it": "12.3.2",
+    "mime": "1.4.1",
+    "moment": "2.29.4",
+    "moment-timezone": "0.5.14",
+    "mustache": "x",
+    "nock": "13.2.2",
+    "q": "1.5.1",
+    "require-reload": "^0.2.2",
+    "set-cookie-parser": "x",
+    "spark-md5": "^3.0.0"
+  }
+}

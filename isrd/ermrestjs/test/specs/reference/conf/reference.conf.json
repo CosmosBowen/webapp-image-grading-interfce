@@ -1,0 +1,20 @@
+{
+    "catalog": {
+        "acls": {
+            "select": ["read-tester"],
+            "write": ["write-tester"]
+        }
+    },
+    "schema": {
+        "name": "reference_schema",
+        "createNew": true,
+        "path": "test/specs/reference/conf/reference_schema/schema.json"
+    },
+    "tables": {
+        "createNew": true
+    },
+    "entities": {
+        "createNew": true,
+        "path": "test/specs/reference/conf/reference_schema/data"
+    }
+}

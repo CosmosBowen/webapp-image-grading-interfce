@@ -1,0 +1,44 @@
+// Spacing
+$left-panel-width-lg: 21vw;
+$left-panel-width-sm: 15vw;
+$left-panel-min-width: 170px;
+$viewport-margin: 20px;
+$main-alley:30px;
+
+
+// button props
+$btn-border-radius: 4px;
+$btn-height: 30px;
+$btn-height-sm: 24px;
+$btn-border-width: 1px;
+$btn-padding-y: 4px;
+$btn-padding-x: 10px;
+
+// input
+$input-remove-width: 18px;
+
+// border width in between inputs and forms in recordedit
+$chaise-RE-border-width: 1px;
+
+// edit column name column
+$chaise-caption-column-width: 200px;
+
+// checkbox
+$chaise-checkbox-width: 20px;
+$chaise-checkbox-height: 20px;
+
+
+// fonts
+$font-size: 14px;
+$h1-font-size: 2.5rem;
+$h2-font-size: 1.75rem;
+$h3-font-size: 1.5rem;
+$h4-font-size: 1.25rem;
+
+/**
+ * map syntax doesn't allow multiline, so we have to have them in separate files.
+ */
+ @import 'maps/record-page-spacing';
+ @import 'maps/z-index-map';
+ @import 'maps/color-map';
+

@@ -1,0 +1,267 @@
+{
+    "comment": "schema for testing aggregate APIs",
+    "schema_name": "aggregate_schema",
+    "tables": {
+        "aggregate_table": {
+            "comment": "Table to represent a testing aggregate functions.",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "id"
+                    ]
+                }
+            ],
+            "foreign_keys": [],
+            "table_name": "aggregate_table",
+            "schema_name": "aggregate_schema",
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "int_agg",
+                    "nullok": true,
+                    "type": {
+                        "typename": "integer"
+                    }
+                },
+                {
+                    "name": "float_agg",
+                    "nullok": true,
+                    "type": {
+                        "typename": "float4"
+                    }
+                },
+                {
+                    "name": "text_agg",
+                    "nullok": true,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "date_agg",
+                    "nullok": true,
+                    "type": {
+                        "typename": "date"
+                    }
+                },
+                {
+                    "name": "timestamp_agg",
+                    "nullok": true,
+                    "type": {
+                        "typename": "timestamptz"
+                    }
+                },
+                {
+                    "name": "column_that_has_a_very_long_name_and_long_values_to_test_limit",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "table_w_only_composite_key": {
+            "comment": "Table with composite key as the only key",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "id_1", "id_2"
+                    ]
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "foreign_key_columns": [{
+                        "table_name": "table_w_only_composite_key",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "col"
+                    }],
+                    "referenced_columns": [{
+                        "table_name": "aggregate_table",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "id"
+                    }]
+                }
+            ],
+            "table_name": "table_w_only_composite_key",
+            "schema_name": "aggregate_schema",
+            "column_definitions": [
+                {
+                    "name": "id_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "id_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "col",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "*": ["col"]
+                }
+            }
+        },
+        "table_w_simple_key": {
+            "comment": "Table with single key and a fk to aggregate_table",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "simple_id"
+                    ]
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "foreign_key_columns": [{
+                        "table_name": "table_w_simple_key",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "simple_id"
+                    }],
+                    "referenced_columns": [{
+                        "table_name": "aggregate_table",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "id"
+                    }]
+                }
+            ],
+            "table_name": "table_w_simple_key",
+            "schema_name": "aggregate_schema",
+            "column_definitions": [
+                {
+                    "name": "simple_id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "*": ["col"]
+                }
+            }
+        },
+        "uᴉɐɯ": {
+            "kind": "table",
+            "table_name": "uᴉɐɯ",
+            "schema_name": "aggregate_schema",
+            "comment": "has unicode characters",
+            "keys": [{"unique_columns": ["pᴉ"]}],
+            "foreign_keys": [
+                {
+                    "foreign_key_columns": [{
+                        "table_name": "uᴉɐɯ",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "pᴉ"
+                    }],
+                    "referenced_columns": [{
+                        "table_name": "aggregate_table",
+                        "schema_name": "aggregate_schema",
+                        "column_name": "id"
+                    }]
+                }
+            ],
+            "column_definitions": [{
+                "name": "pᴉ",
+                "nullok": false,
+                "type": {
+                    "typename": "serial4"
+                }
+            },
+            {
+                "name": "loɔ",
+                "type": {
+                    "typename": "text"
+                }
+            }],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "*": ["pᴉ", "loɔ"]
+                }
+            }
+        },
+        "histogram_annotation": {
+            "kind": "table",
+            "table_name": "histogram_annotation",
+            "schema_name": "aggregate_schema",
+            "comment": "has the histogram annotation for faceting",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "no_histogram_int",
+                    "type": {
+                        "typename": "integer"
+                    }
+                },
+                {
+                    "name": "dif_num_buckets_float",
+                    "type": {
+                        "typename": "float4"
+                    }
+                },
+                {
+                    "name": "default_date",
+                    "type": {
+                        "typename": "date"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "filter": {
+                        "and": [
+                            {"source": "no_histogram_int", "bar_plot": false},
+                            {"source": "dif_num_buckets_float", "bar_plot": { "n_bins": 50}},
+                            {"source": "default_date"}
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "table_names": [
+        "aggregate_table"
+    ]
+}

@@ -1,0 +1,142 @@
+@use 'sass:map';
+@use 'variables';
+
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+  @if $fallback-border-radius != false {
+    border-radius: $fallback-border-radius;
+  } @else {
+    border-radius: $radius;
+  }
+}
+@mixin border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-top-left-radius($radius) {
+  border-top-left-radius: $radius;
+}
+@mixin border-top-right-radius($radius) {
+  border-top-right-radius: $radius;
+}
+@mixin border-bottom-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+}
+@mixin border-bottom-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+}
+
+@mixin download-btn() {
+  color: map-get(variables.$color-map, 'primary');
+  white-space: nowrap;
+  // touch action
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+
+  // download buttons don't have the
+  // rule that disallows user selection
+
+  // allow the caption to wrap
+  white-space: normal;
+
+  &:before {
+    content: '\f019'; // fa-solid fa-download
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    padding-right: 4px;
+  }
+
+  &.external-link-icon:not(.external-link-no-icon) {
+    // change the icon to cloud download
+    &:before {
+      content: '\f0ed'; // fa-solid fa-cloud-arrow-down
+    }
+
+    //remove the external link icon on after
+    &::after {
+      content: '' !important;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@mixin chaise-btn() {
+  @include border-radius(variables.$btn-border-radius);
+  cursor: pointer;
+  display: inline-block;
+  height: variables.$btn-height;
+  min-width: variables.$btn-height;
+  border: variables.$btn-border-width solid;
+  padding: variables.$btn-padding-y variables.$btn-padding-x;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  white-space: nowrap;
+}
+
+@mixin chaise-btn-primary() {
+  color: map-get(variables.$color-map, 'white');
+  background-color: map-get(variables.$color-map, 'primary');
+  border-color: map-get(variables.$color-map, 'black');
+
+  &:focus {
+    background-color: darken(map-get(variables.$color-map, 'primary'), 10%);
+    box-shadow: none;
+  }
+}
+
+@mixin chaise-btn-secondary {
+  color: map-get(variables.$color-map, 'primary');
+  background-color: map-get(variables.$color-map, 'white');
+  border: 1px solid map-get(variables.$color-map, 'primary');
+
+  &:focus {
+    background-color: darken(map-get(variables.$color-map, 'white'), 10%);
+    box-shadow: none;
+  }
+}
+
+@mixin chaise-btn-sm {
+  height: variables.$btn-height-sm;
+  min-width: variables.$btn-height-sm;
+  font-size: 1rem;
+  padding: 2px 5px;
+}
+
+// can be used to write media-queries
+@mixin for-predefined-size($size) {
+  @if $size == xs {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $size == sm {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $size == md {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $size == lg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}

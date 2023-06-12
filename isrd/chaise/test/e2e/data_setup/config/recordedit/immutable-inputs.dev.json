@@ -1,0 +1,9 @@
+{
+    "setup": {
+        "schemaConfigurations": [
+            "recordedit/immutable-inputs.config.json"
+        ],
+        "schema": "defaults"
+    },
+    "cleanup": true
+}

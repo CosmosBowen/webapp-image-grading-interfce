@@ -1,0 +1,207 @@
+.image-container {
+  width: 600px;
+  /* Set the desired width of the frame */
+  height: 400px;
+  /* Set the desired height of the frame */
+
+  // overflow: hidden;
+  // position: relative;
+}
+
+/* .myImage {
+  width: 800px;
+  height: 600px;
+} */
+
+// .image {
+//   width: 400px;
+//   /* Set the desired width of the frame */
+//   height: 300px;
+//   /* Set the desired height of the frame */
+//   overflow: hidden;
+//   position: relative;
+// }
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Maintain original aspect ratio */
+}
+
+.zoomed-in {
+  transform: scale(2);
+  transition: transform 0.3s;
+}
+
+// body {
+//   background-image: url('./background.jpg');
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100%;
+  line-height: 1.428;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* This line ensures the container takes the full viewport height */
+  margin: 5px;
+  /* Margin against the border of the screen */
+}
+
+.container-box {
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: end;
+  margin-top: 15px;
+}
+
+select {
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+}
+
+.group {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.vertical-items {
+  display: flex;
+  flex-direction: column;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+td {
+  text-align: left;
+}
+
+td,
+th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+button {
+  margin-left: 5px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  height: 100%;
+  line-height: 1.428;
+}
+
+.custom-slider {
+  -webkit-appearance: none;
+  /* Override default CSS styles */
+  appearance: none;
+  width: 100%;
+  /* Full-width */
+  height: 10px;
+  /* Specified height */
+  background: #4674a7;
+  margin-top: 3px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  /* Grey background */
+  outline: none;
+  /* Remove outline */
+  opacity: 1;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Thumb */
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Override default look */
+  appearance: none;
+  width: 20px;
+  /* Set a specific slider handle width */
+  height: 20px;
+  /* Slider handle height */
+  background: #21364e;
+  border-radius: 4px;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 20px;
+  /* Set a specific slider handle width */
+  height: 20px;
+  /* Slider handle height */
+  background: #21364e;
+  border-radius: 4px;
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
+}
+
+
+// button,
+// input {
+//   display: inline-block;
+//   padding: 4px 10px;
+//   font-size: 16px;
+//   font-weight: 300;
+//   color: white;
+//   background-color: #4674a7;
+//   border-color: #333;
+//   border-radius: 4px;
+
+//   border: 1px solid;
+//   height: 30px;
+//   min-width: 30px;
+
+//   text-align: center;
+//   vertical-align: middle;
+
+//   text-decoration: none;
+//   transition: all 0.3s ease-out;
+//   cursor: pointer;
+//   margin-left: 5px;
+// }
+
+// button:hover,
+// input:hover,
+// .td-number:hover {
+//   background-color: #34577fda;
+// }
+
+// button:active,
+// input:active,
+// .td-number:active {
+//   background-color: #34577fda;
+// }

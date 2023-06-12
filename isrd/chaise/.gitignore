@@ -1,0 +1,37 @@
+*~
+#*
+*.swp
+.DS_Store*
+.project
+._*
+.Spotlight-V100
+.Trashes
+.idea
+.idea/
+.vscode
+ehthumbs.db
+Thumbs.db
+bower_components
+node_modules
+dist
+deployment-config.json
+.make-*
+index.html
+/chaise-config.js
+/google-dataset-config.js
+viewer/viewer-config.js
+sftp-config.json
+npm-debug.log
+version.txt
+mdHelp.html
+# ignore uploaded files
+test/e2e/data_setup/uploaded_files/*.*
+entities.json
+lib/switchUserAccounts.html
+
+# the compiled css files
+common/styles/app.css
+common/styles/navbar.css
+
+# sass temporary compiled files
+.sass-cache

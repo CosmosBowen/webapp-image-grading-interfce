@@ -1,0 +1,15 @@
+{
+    "catalog": {},
+    "schema": {
+        "name": "product-unordered-related-tables-actions",
+        "createNew": true,
+        "path": "test/e2e/data_setup/schema/record/product-unordered-related-tables-actions.json"
+    },
+    "tables": {
+        "createNew": true
+    },
+    "entities": {
+        "createNew": true,
+        "path": "test/e2e/data_setup/data/product"
+    }
+}

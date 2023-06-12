@@ -1,0 +1,257 @@
+{
+    "schema_name": "editable-id",
+    "tables": {
+        "editable-id-table": {
+            "comment": "Table to represent adding multiple entities",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "id"
+                    ]
+                }
+            ],
+            "foreign_keys": [],
+            "table_name": "editable-id-table",
+            "schema_name": "editable-id",
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "default": null,
+                    "nullok": false,
+                    "type": {
+                        "typename": "int"
+                    },
+                    "annotations": {
+                        "comment": [
+                            "hidden"
+                        ]
+                    }
+                },
+                {
+                    "name": "text",
+                    "default": "default text",
+                    "nullok": true,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "int",
+                    "default": 100,
+                    "nullok": true,
+                    "type": {
+                        "typename": "int"
+                    }
+                },
+                {
+                    "name": "generated",
+                    "nullok": true,
+                    "type": {
+                        "typename": "int"
+                    },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:generated": null,
+                        "tag:isrd.isi.edu,2016:immutable": null
+                    }
+                },
+                {
+                  "name": "asset1_uri",
+                  "type": {
+                    "typename": "text"
+                  },
+                  "annotations": {
+                    "tag:isrd.isi.edu,2017:asset": {
+                      "url_pattern":"hatrac/js/chaise/{{{_fileid}}}/{{{_uri.md5_hex}}}",
+                      "filename_column" : "asset1_filename",
+                      "byte_count_column": "asset1_bytes"
+                    }
+                  }
+                },
+                {
+                  "name": "asset1_filename",
+                  "type": {
+                    "typename": "text"
+                  }
+                },
+                {
+                  "name": "asset1_bytes",
+                  "type": {
+                    "typename": "int8"
+                  }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "*": ["id", "text", "int", "generated", "asset1_uri", "asset1_filename", "asset1_bytes"],
+                    "export": []
+                },
+                "tag:misd.isi.edu,2015:display" : {
+                    "markdown_name": "**Editable Id Table**"
+                },
+                "tag:isrd.isi.edu,2016:table-display" : {
+                    "row_name": {
+                        "row_markdown_pattern": "**{{id}}**"
+                    }
+                },
+                "tag:isrd.isi.edu,2019:export": {
+                    "*": {
+                        "templates": [{
+                            "outputs": [{
+                                "source": {
+                                    "api": "entity"
+                                },
+                                "destination": {
+                                    "type": "csv",
+                                    "name": "table_bag"
+                                }
+                            }],
+                            "displayname": "Defined template",
+                            "type": "BAG"
+                        }]
+                    }
+                }
+            }
+        },
+        "html-name-table": {
+            "comment": "Table to represent adding multiple entities",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "id"
+                    ]
+                }
+            ],
+            "foreign_keys": [],
+            "table_name": "html-name-table",
+            "schema_name": "editable-id",
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "default": null,
+                    "nullok": false,
+                    "type": {
+                        "typename": "int"
+                    },
+                    "annotations": {
+                        "comment": [
+                            "hidden"
+                        ]
+                    }
+                }, {
+                    "name": "text",
+                    "default": "default text",
+                    "nullok": true,
+                    "type": {
+                        "typename": "text"
+                    }
+                }, {
+                    "name": "int",
+                    "default": 100,
+                    "nullok": true,
+                    "type": {
+                        "typename": "int"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "*": ["id", "text", "int"],
+                    "export": []
+                },
+                "tag:misd.isi.edu,2015:display" : {
+                    "name": "<strong>Html Name</strong>"
+                },
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "detailed": {
+                        "collapse_toc_panel": true,
+                        "hide_column_header": true
+                    }
+                },
+                "tag:isrd.isi.edu:2020,history-capture": true
+            }
+        },
+        "fk-table": {
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": [
+                        "id"
+                    ]
+                }
+            ],
+            "foreign_keys": [
+                {
+                  "comment": null,
+                  "names": [["editable-id", "foreign_table"]],
+                  "foreign_key_columns": [
+                    {
+                      "table_name": "fk-table",
+                      "schema_name": "editable-id",
+                      "column_name": "foreign_table"
+                    }
+                  ],
+                  "annotations": {},
+                  "referenced_columns": [
+                    {
+                      "table_name": "html-name-table",
+                      "schema_name": "editable-id",
+                      "column_name": "id"
+                    }
+                  ]
+                }
+            ],
+            "table_name": "fk-table",
+            "schema_name": "editable-id",
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "default": null,
+                    "nullok": false,
+                    "type": {
+                        "typename": "int"
+                    }
+                }, {
+                    "name": "text",
+                    "default": "default text",
+                    "nullok": true,
+                    "type": {
+                        "typename": "text"
+                    }
+                }, {
+                    "name": "int",
+                    "default": 100,
+                    "nullok": true,
+                    "type": {
+                        "typename": "int"
+                    }
+                }, {
+                    "name": "foreign_table",
+                    "nullok": true,
+                    "type": {
+                        "typename": "int"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "*": ["text", "int"]
+                }
+            }
+        }
+    },
+    "table_names": [
+        "editable-id-table",
+        "html-name-table",
+        "fk-table"
+    ],
+    "comment": null,
+    "annotations": {}
+}

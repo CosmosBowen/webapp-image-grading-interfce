@@ -1,0 +1,704 @@
+{
+    "tables": {
+        "table_1_schema_2": {
+            "comment": "has inbound fk from table_2_schema_1",
+            "kind": "table",
+            "table_name": "table_1_schema_2",
+            "keys": [
+                { "unique_columns": ["table_1_first_key", "table_1_second_key"] },
+                { "unique_columns": ["table_1_int_key"]},
+                { "unique_columns": ["table_1_serial_key"]}
+            ],
+            "column_definitions": [
+                {
+                    "name": "table_1_int_key",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "table_1_serial_key",
+                    "nullok": false,
+                    "type": {"typename": "serial4"}
+                },
+                {
+                    "name": "table_1_first_key",
+                    "nullok": false,
+                    "type": { "typename": "text" }
+                },
+                {
+                    "name": "table_1_second_key",
+                    "nullok": false,
+                    "type": { "typename": "text" }
+                },
+                {
+                    "name": "table_1_text",
+                    "type": { "typename": "text" }
+                },
+                {
+                    "name": "table_1_longtext",
+                    "type": { "typename": "longtext" }
+                },
+                {
+                    "name": "table_1_date",
+                    "type": { "typename": "date" }
+                },
+                {
+                    "name": "table_1_boolean",
+                    "type": { "typename": "boolean" }
+                },
+                {
+                    "name": "table_1_timestamp",
+                    "type": { "typename": "timestamptz" }
+                },
+                {
+                    "name": "table_1_float4",
+                    "type": { "typename": "float4" }
+                },
+                {
+                    "name": "table_1_float8",
+                    "type": { "typename": "float8" }
+                },
+                {
+                    "name": "table_1_numeric",
+                    "type": { "typename": "numeric" }
+                },
+                {
+                    "name": "table_1_int2",
+                    "type": { "typename": "int2" }
+                },
+                {
+                    "name": "table_1_int4",
+                    "type": { "typename": "int4" }
+                },
+                {
+                    "name": "table_1_int8",
+                    "type": { "typename": "int8" }
+                },
+                {
+                    "name": "table_1_markdown",
+                    "type": { "typename": "markdown" }
+                },
+                {
+                    "name": "table_1_show_null_annotation",
+                    "type": {"typename": "text"},
+                    "annotations": {
+                        "tag:misd.isi.edu,2015:display": {
+                            "show_null": {
+                                "compact/brief": "empty",
+                                "detailed": true,
+                                "entry/edit": false
+                            },
+                            "show_nulls": {
+                                "compact": "backward compatibility",
+                                "*": "default"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_gene_sequence",
+                    "type": { "typename": "gene_sequence" }
+                },
+                {
+                    "name": "table_1_generated",
+                    "type": { "typename": "text" },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:generated": null
+                    }
+                },
+                {
+                    "name": "table_1_immutable",
+                    "type": { "typename": "text" },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:immutable": null
+                    }
+                },
+                {
+                    "name": "table_1_required",
+                    "type": { "typename": "text" },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2018:required": null
+                    }
+                },
+                {
+                    "name": "table_1_serial4",
+                    "type": { "typename": "serial4" }
+                },
+                {
+                    "name": "table_1_color_rgb_hex",
+                    "type": { "typename": "color_rgb_hex" }
+                },
+                {
+                    "name": "table_1_text_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "text[]",
+                        "base_type": {
+                            "typename": "text"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_boolean_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "boolean[]",
+                        "base_type": {
+                            "typename": "boolean"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_date_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "date[]",
+                        "base_type": {
+                            "typename": "date"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_timestamp_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "timestamp[]",
+                        "base_type": {
+                            "typename": "timestamp"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_timestamptz_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "timestamptz[]",
+                        "base_type": {
+                            "typename": "timestamptz"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_float4_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "float4[]",
+                        "base_type": {
+                            "typename": "float4"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_float8_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "float8[]",
+                        "base_type": {
+                            "typename": "float8"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_numeric_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "numeric[]",
+                        "base_type": {
+                            "typename": "numeric"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_int2_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int2[]",
+                        "base_type": {
+                            "typename": "int2"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_int4_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int4[]",
+                        "base_type": {
+                            "typename": "int4"
+                        }
+                    }
+                },
+                {
+                    "name": "table_1_int8_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int8[]",
+                        "base_type": {
+                            "typename": "int8"
+                        }
+                    }
+                }
+            ],
+            "foreign_keys": [],
+            "annotations": {
+                "tag:misd.isi.edu,2015:display": {
+                    "show_null": {
+                        "entry/create": "table"
+                    }
+                }
+            }
+        },
+        "table_w_dif_len_keys": {
+            "comment": "",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2", "col_3"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_3"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2"]
+                }
+            ],
+            "entityCount": 0,
+            "foreign_keys": [],
+            "table_name": "table_w_dif_len_keys",
+            "schema_name": "common_schema_2",
+            "column_definitions": [
+                {
+                    "name": "col_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                },
+                {
+                    "name": "col_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                },
+                {
+                    "name": "col_3",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "table_w_nullable_key": {
+            "kind": "table",
+            "keys": [
+                {"unique_columns": ["nullable_col"]},
+                {"unique_columns": ["not_null_col_1", "not_null_col_2"]}
+            ],
+            "table_name": "table_w_nullable_key",
+            "schema_name": "common_schema_2",
+            "column_definitions": [
+                {
+                    "name": "nullable_col",
+                    "nullok": true,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "not_null_col_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "not_null_col_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ]
+
+        },
+        "multi_w_same_len_keys_w_all_serial": {
+            "comment": "",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_2", "col_3"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2", "col_3"]
+                }
+            ],
+            "entityCount": 0,
+            "foreign_keys": [],
+            "table_name": "multi_w_same_len_keys_w_all_serial",
+            "schema_name": "common_schema_2",
+            "column_definitions": [
+                {
+                    "name": "col_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "col_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                },
+                {
+                    "name": "col_3",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "multi_w_same_len_keys": {
+            "comment": "",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2", "col_3"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_1", "col_2"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["col_2", "col_3"]
+                }
+            ],
+            "entityCount": 0,
+            "foreign_keys": [],
+            "table_name": "multi_w_same_len_keys",
+            "schema_name": "common_schema_2",
+            "column_definitions": [
+                {
+                    "name": "col_3",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "col_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                },
+                {
+                    "name": "col_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "table_w_rid_key": {
+            "comment": "table for testing if RID is selected over other int/serial columns that are defined as keys",
+            "kind": "table",
+            "keys": [
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["int_col"]
+                },
+                {
+                    "comment": null,
+                    "annotations": {},
+                    "unique_columns": ["serial_col"]
+                }
+            ],
+            "foreign_keys": [],
+            "table_name": "table_w_rid_key",
+            "schema_name": "common_schema_2",
+            "column_definitions": [
+                {
+                    "name": "int_col",
+                    "nullok": false,
+                    "type": {
+                        "typename": "int8"
+                    }
+                },
+                {
+                    "name": "serial_col",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "table_w_defaults": {
+            "comment": "has proper and improper defaul values",
+            "kind": "table",
+            "table_name": "table_w_defaults",
+            "keys": [
+                { "unique_columns": ["key"] }
+            ],
+            "column_definitions": [
+                {
+                    "name": "key",
+                    "nullok": false,
+                    "type": { "typename": "text" }
+                },
+                {
+                    "name": "boolean_proper",
+                    "default": "true",
+                    "type": { "typename": "boolean" }
+                },
+                {
+                    "name": "boolean_improper",
+                    "default": null,
+                    "type": { "typename": "boolean" }
+                },
+                {
+                    "name": "date_proper",
+                    "default": "2010-06-08",
+                    "type": { "typename": "date" }
+                },
+                {
+                    "name": "date_improper",
+                    "default": null,
+                    "type": { "typename": "date" }
+                },
+                {
+                    "name": "timestamp_proper",
+                    "default": "2016-05-14T12:30:00",
+                    "type": { "typename": "timestamp" }
+                },
+                {
+                    "name": "timestamp_improper",
+                    "default": null,
+                    "type": { "typename": "timestamp" }
+                },
+                {
+                    "name": "timestamptz_proper",
+                    "default": "2016-05-14T12:30:00-07:00",
+                    "type": { "typename": "timestamptz" }
+                },
+                {
+                    "name": "timestamptz_improper",
+                    "default": null,
+                    "type": { "typename": "timestamptz" }
+                },
+                {
+                    "name": "float4_proper",
+                    "default": 1.456,
+                    "type": { "typename": "float4" }
+                },
+                {
+                    "name": "float4_improper",
+                    "default": null,
+                    "type": { "typename": "float4" }
+                },
+                {
+                    "name": "float8_proper",
+                    "default": 22.7849503,
+                    "type": { "typename": "float8" }
+                },
+                {
+                    "name": "float8_improper",
+                    "default": null,
+                    "type": { "typename": "float8" }
+                },
+                {
+                    "name": "numeric_proper",
+                    "default": 0.591294,
+                    "type": { "typename": "numeric" }
+                },
+                {
+                    "name": "numeric_improper",
+                    "default": null,
+                    "type": { "typename": "numeric" }
+                },
+                {
+                    "name": "int2_proper",
+                    "default": 12,
+                    "type": { "typename": "int2" }
+                },
+                {
+                    "name": "int2_improper",
+                    "default": null,
+                    "type": { "typename": "int2" }
+                },
+                {
+                    "name": "int4_proper",
+                    "default": 373834945,
+                    "type": { "typename": "int4" }
+                },
+                {
+                    "name": "int4_improper",
+                    "default": null,
+                    "type": { "typename": "int4" }
+                },
+                {
+                    "name": "int8_proper",
+                    "default": 73829572,
+                    "type": { "typename": "int8" }
+                },
+                {
+                    "name": "int8_improper",
+                    "default": null,
+                    "type": { "typename": "int8" }
+                },
+                {
+                    "name": "color_rgb_hex_proper",
+                    "default": "#123456",
+                    "type": {"typename": "color_rgb_hex"}
+                },
+                {
+                    "name": "color_rgb_hex_improper_1",
+                    "default": null,
+                    "type": {"typename": "color_rgb_hex"}
+                },
+                {
+                    "name": "color_rgb_hex_improper_2",
+                    "default": "#invalidvalue",
+                    "type": {"typename": "color_rgb_hex"}
+                }
+            ],
+            "foreign_keys": [],
+            "annotations": {}
+        },
+        "table_show_fk_links": {
+            "kind": "table",
+            "table_name": "table_show_fk_links",
+            "schema_name": "common_schema_2",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "type": {"typename": "text"},
+                    "nullok": false
+                },
+                {
+                    "name": "fk1_col",
+                    "type": {"typename": "int4"}
+                }
+            ],
+            "foreign_keys": [{
+                "names": [["common_schema_2", "table_show_fk_links_fk1"]],
+                "foreign_key_columns": [{
+                    "schema_name": "common_schema_2",
+                    "table_name": "table_show_fk_links",
+                    "column_name": "fk1_col"
+                }],
+                "referenced_columns": [{
+                    "schema_name": "common_schema_2",
+                    "table_name": "table_1_schema_2",
+                    "column_name": "table_1_int_key"
+                }],
+                "annotations": {
+                    "tag:isrd.isi.edu,2016:foreign-key": {
+                        "display": {
+                            "detailed": {
+                                "show_foreign_key_link": false
+                            }
+                        }
+                    }
+                }
+            }],
+            "annotations": {
+                "tag:misd.isi.edu,2015:display": {
+                    "show_foreign_key_link": {
+                        "compact/select": false
+                    }
+                },
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "*": [["common_schema_2", "table_show_fk_links_fk1"]]
+                }
+            }
+        },
+        "table_wo_history_capture": {
+            "kind": "table",
+            "table_name": "table_wo_history_capture",
+            "keys": [{"unique_columns": ["id"]}],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                }
+            ]
+        },
+        "table_w_history_capture_true": {
+            "kind": "table",
+            "table_name": "table_w_history_capture_true",
+            "keys": [{"unique_columns": ["id"]}],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu:2020,history-capture": true
+            }
+        },
+        "table_w_history_capture_false": {
+            "kind": "table",
+            "table_name": "table_w_history_capture_false",
+            "keys": [{"unique_columns": ["id"]}],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu:2020,history-capture": false
+            }
+        }
+    },
+    "schema_name": "common_schema_2",
+    "annotations": {
+        "tag:misd.isi.edu,2015:display": {
+            "show_null": {
+                "entry": "schema"
+            },
+            "show_foreign_key_link": {
+                "compact/brief": false
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "catalog": {},
+    "schema": {
+        "name": "catalog-annotation",
+        "createNew": true,
+        "path": "test/specs/annotation/conf/catalog/schema.json"
+    },
+    "tables": {
+        "createNew": true
+    }
+}

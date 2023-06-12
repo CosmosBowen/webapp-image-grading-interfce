@@ -1,0 +1,1822 @@
+{
+    "schema_name": "faceting_schema",
+    "tables": {
+        "main": {
+            "kind": "table",
+            "table_name": "main",
+            "schema_name": "faceting_schema",
+            "comment": "main table for the faceting",
+            "keys": [
+                {
+                    "unique_columns": ["id"],
+                    "names": [["faceting_schema", "main_key1"]]
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "comment": "fk to f1",
+                    "names": [["faceting_schema", "main_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_f1",
+                            "table_name": "main",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "f1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                },
+                {
+                    "names": [["faceting_schema", "main_fk2"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_f2",
+                            "table_name": "main",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "f2",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:foreign-key": {
+                            "to_name": "to_name"
+                        }
+                    }
+                },
+                {
+                    "names": [["faceting_schema", "main_fk3"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_path_prefix_o1",
+                            "table_name": "main",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "path_prefix_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "text_col",
+                    "comment": "text comment",
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "longtext_col",
+                    "type": {
+                        "typename": "longtext"
+                    }
+                },
+                {
+                    "comment": "comment that should not be used",
+                    "name": "markdown_col",
+                    "type": {
+                        "typename": "markdown"
+                    }
+                },
+                {
+                    "name": "int_col",
+                    "type": {
+                        "typename": "int4"
+                    }
+                },
+                {
+                    "name": "numeric_col",
+                    "type": {
+                        "typename": "numeric"
+                    }
+                },
+                {
+                    "name": "float_col",
+                    "type": {
+                        "typename": "float4"
+                    }
+                },
+                {
+                    "name": "date_col",
+                    "type": {
+                        "typename": "date"
+                    }
+                },
+                {
+                    "name": "timestamp_col",
+                    "type": {
+                        "typename": "timestamptz"
+                    }
+                },
+                {
+                    "name": "boolean_col",
+                    "type": {
+                        "typename": "boolean"
+                    },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:column-display" : {
+                            "compact": {
+                                "pre_format": {
+                                    "format": "%t",
+                                    "bool_true_value": "YES",
+                                    "bool_false_value": "NO"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "json_col",
+                    "type": {
+                        "typename": "json"
+                    }
+                },
+                {
+                    "name": "jsonb_col",
+                    "type": {
+                        "typename": "jsonb"
+                    }
+                },
+                {
+                    "name": "fk_to_f1",
+                    "comment": "comment",
+                    "type": {
+                        "typename": "serial4"
+                    },
+                    "nullok": true
+                },
+                {
+                    "name": "fk_to_f2",
+                    "type": {
+                        "typename": "serial4"
+                    },
+                    "nullok": false
+                },
+                {
+                    "name": "fk_to_path_prefix_o1",
+                    "type": {
+                        "typename": "int4"
+                    },
+                    "nullok": true,
+                    "default": null
+                },
+                {
+                    "name": "unfaceted_column",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "compact": [
+                        "id",
+                        {
+                            "sourcekey": "path_to_path_prefix_o1",
+                            "comment": "added to test integration with read logic",
+                            "display": {
+                                "wait_for": ["path_to_path_prefix_o1_o1"],
+                                "show_foreign_key_link":false
+                            }
+                        },
+                        {
+                            "sourcekey": "path_to_path_prefix_o1_o1",
+                            "comment": "added to test integration with read logic",
+                            "display": {
+                                "wait_for": ["path_to_path_prefix_o1_o1"],
+                                "show_foreign_key_link":false
+                            }
+                        },
+                        {
+                            "source": [
+                                {"sourcekey": "path_to_path_prefix_o1_o1"},
+                                {"outbound": ["faceting_schema", "path_prefix_o1_o1_fk1"]},
+                                "path_prefix_o1_o1_o1_col"
+                            ],
+                            "comment": "added to test integration with read logic",
+                            "display": {"show_foreign_key_link":false}
+                        }
+                    ],
+                    "compact/select": [
+                        "id",
+                        ["faceting_schema", "main_fk1"]
+                    ],
+                    "filter": {
+                        "and": [
+                            {"sourcekey": "search-box", "choices": ["test"]},
+                            {"sourcekey": "id_source_definition", "choices": ["1"], "hide_num_occurrences": false, "markdown_name": "ID facet"},
+                            {"source": "int_col", "ux_mode": "choices", "ranges": [{"min": -2}], "order": [{"column": "id", "descending": true}], "hide_num_occurrences": true, "hide_not_null_choice": true},
+                            {"source": ["float_col"], "markdown_name": "float_col markdown_name", "ux_mode": "invalid mode", "order": [{"column": "id"}, {"column": "float_col", "descending": true}], "hide_not_null_choice": true},
+                            {"source": "date_col"},
+                            {"source": "timestamp_col"},
+                            {"sourcekey": "text_col_source_definition", "ux_mode": "invalid mode", "order": [{"column": "date_col"}, {"num_occurrences": true}]},
+                            {"source": "longtext_col", "comment": "long text comment in facet", "order": false},
+                            {"source": "markdown_col", "order": [{"column": "invalid!!"}], "hide_num_occurrences": true, "hide_not_null_choice": false, "comment": false},
+                            {"source": "boolean_col", "ux_mode": "ranges"},
+                            {"source": ["json_col"]},
+                            {"source": ["jsonb_col"]},
+                            {"source": [{"outbound": ["faceting_schema", "main_fk1"]}, "id"], "markdown_name": "**F1**", "hide_null_choice": true, "comment": false},
+                            {"source": [{"outbound": ["faceting_schema", "main_fk2"]}, "id"], "open": true},
+                            {"source": [{"inbound": ["faceting_schema", "main_f3_assoc_fk1"]}, {"outbound": ["faceting_schema", "main_f3_assoc_fk2"]}, "term"], "hide_not_null_choice":  true},
+                            {"source": [{"inbound": ["faceting_schema", "f4_fk1"]}, "id"], "entity": false, "ux_mode": "check_presence"},
+                            {"source": [
+                                {"inbound": ["faceting_schema", "longpath_1_fk1"]},
+                                {"inbound": ["faceting_schema", "longpath_2_fk1"]},
+                                {"inbound": ["faceting_schema", "longpath_3_fk1"]},
+                                {"inbound": ["faceting_schema", "longpath_4_fk1"]},
+                                {"inbound": ["faceting_schema", "longpath_5_fk1"]},
+                                "col"
+                            ]},
+                            {"source": [
+                                {"inbound": ["faceting_schema", "secondpath_1_fk1"]},
+                                {"inbound": ["faceting_schema", "secondpath_2_fk1"]},
+                                "id"
+                            ], "hide_null_choice": true},
+                            {"sourcekey": "second_path_source_defnition", "entity": false},
+                            {
+                                "source": [
+                                    {"inbound": ["faceting_schema", "secondpath_1_fk1"]},
+                                    {"inbound": ["faceting_schema", "secondpath_2_fk1"]},
+                                    "RID"
+                                ],
+                                "entity": false
+                            },
+                            {"sourcekey": "path_to_f3_id"},
+                            {"source": "numeric_col"},
+                            {"source": [{"inbound": ["faceting_schema", "f4_fk1"]}, "int_col"], "entity": false},
+                            {
+                                "sourcekey": "path_to_path_prefix_o1_o1",
+                                "markdown_name": "Path to o1_o1 with prefix"
+                            },
+                            {
+                                "source": [
+                                    {"sourcekey": "path_to_path_prefix_o1_o1"},
+                                    {"inbound": ["faceting_schema", "path_prefix_o1_o1_i1_fk1"]},
+                                    "path_prefix_o1_o1_i1_col"
+                                ]
+                            },
+                            {
+                                "source": [
+                                    {"filter": "id", "operand_pattern": "1", "operator": "::gt::"},
+                                    "id"
+                                ],
+                                "markdown_name": "id with filter"
+                            },
+                            {
+                                "sourcekey": "path_to_path_prefix_o1_w_filter",
+                                "markdown_name": "path with complicated filters"
+                            },
+                            {
+                                "sourcekey": "path_to_path_prefix_o1_o1_w_filter",
+                                "markdown_name": "Path to o1_o1 with prefix and filter"
+                            },
+                            {"source": [
+                                {"sourcekey": "path_to_path_prefix_o1_o1_w_filter"},
+                                {"inbound": ["faceting_schema", "path_prefix_o1_o1_i1_fk1"]},
+                                "path_prefix_o1_o1_i1_col"
+                            ]}
+                        ]
+                    }
+                },
+                "tag:isrd.isi.edu,2019:source-definitions": {
+                    "columns": true,
+                    "fkeys": false,
+                    "sources": {
+                        "id_source_definition": {
+                            "source": "id",
+                            "ux_mode": "ranges"
+                        },
+                        "text_col_source_definition": {
+                            "source": "text_col",
+                            "ux_mode": "choices"
+                        },
+                        "second_path_source_defnition": {
+                            "source": [
+                                {"inbound": ["faceting_schema", "secondpath_1_fk1"]},
+                                {"inbound": ["faceting_schema", "secondpath_2_fk1"]},
+                                "RID"
+                            ],
+                            "entity": true
+                        },
+                        "f1_source_definition": {
+                            "source": [{"outbound": ["faceting_schema", "main_fk1"]}, "id"],
+                            "entity": true
+                        },
+                        "path_to_path_prefix_o1": {
+                            "source": [
+                                {"outbound": ["faceting_schema", "main_fk3"]},
+                                "path_prefix_o1_col"
+                            ]
+                        },
+                        "path_to_path_prefix_o1_o1": {
+                            "source": [
+                                {"sourcekey": "path_to_path_prefix_o1"},
+                                {"outbound": ["faceting_schema", "path_prefix_o1_fk1"]},
+                                "path_prefix_o1_o1_col"
+                            ]
+                        },
+                        "path_to_path_prefix_o1_o1_entity": {
+                            "source": [
+                                {"sourcekey": "path_to_path_prefix_o1_o1"},
+                                "id"
+                            ]
+                        },
+                        "path_to_f3_id": {
+                            "source": [
+                                {"inbound": ["faceting_schema", "main_f3_assoc_fk1"]},
+                                {"outbound": ["faceting_schema", "main_f3_assoc_fk2"]},
+                                 "id"
+                            ]
+                        },
+                        "path_to_path_prefix_o1_w_filter": {
+                            "source": [
+                                {"outbound": ["faceting_schema", "main_fk3"]},
+                                {"and": [
+                                    {"filter": "date_col", "operand_pattern": "{{{$moment.year}}}-{{{$moment.month}}}-{{{$moment.day}}}", "operator": "::gt::"},
+                                    {"filter": "path_prefix_o1_col", "operand_pattern": "some_non_used_value"}
+                                ], "negate": true},
+                                "path_prefix_o1_col"
+                            ]
+                        },
+                        "path_to_path_prefix_o1_o1_w_filter": {
+                            "source": [
+                                {"sourcekey": "path_to_path_prefix_o1_w_filter"},
+                                {"outbound": ["faceting_schema", "path_prefix_o1_fk1"]},
+                                "path_prefix_o1_o1_col"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "f1": {
+            "kind": "table",
+            "table_name": "f1",
+            "schema_name": "faceting_schema",
+            "comment": "main table has fk to this table",
+            "keys": [
+                {"unique_columns": ["id"]},
+                {"unique_columns": ["term"]}
+            ],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "term",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "filter": [["faceting_schema", "main_fk1"], "id", "term"]
+                }
+            }
+        },
+        "f2": {
+            "kind": "table",
+            "table_name": "f2",
+            "schema_name": "faceting_schema",
+            "comment": "has fk to main table + has rowname",
+            "keys": [
+                {"unique_columns": ["id"]},
+                {"unique_columns": ["term"]}
+            ],
+            "foreign_keys": [
+                {
+                    "comment": "fk to f1",
+                    "names": [["faceting_schema", "f2_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_f1",
+                            "table_name": "f2",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "f1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "term",
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "fk_to_f1",
+                    "type": {
+                        "typename": "int4"
+                    },
+                    "nullok": true
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "row_name": {
+                        "row_markdown_pattern": "**{{term}}**"
+                    }
+                },
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "filter": {
+                        "and": [
+                            {"source": "some col"},
+                            {"source": [{"outbound": ["faceting_schema", "main_fk2"]}, "id"]},
+                            {"source": [{"inbound": ["faceting_schema", "main_fk1"]}, "id"]},
+                            {"source": [{"outbound": ["faceting_schema", "f2_fk1"]}, "some_invalid_col"]},
+                            {"source": [
+                                {"outbound": ["faceting_schema", "f2_fk1"]},
+                                {"filter": "some_col", "operand_pattern": "1"},
+                                "RID"
+                            ]},
+                            {"source": [
+                                {"outbound": ["faceting_schema", "f2_fk1"]},
+                                {"filter": "RID"},
+                                "RID"
+                            ]},
+                            {"source": [
+                                {"outbound": ["faceting_schema", "f2_fk1"]},
+                                {"filter": "RID", "operand_pattern": "{{{invalid_parameter}}}"},
+                                "RID"
+                            ]},
+                            {"source": [
+                                {"outbound": ["faceting_schema", "f2_fk1"]},
+                                {"or": [
+                                    {"filter": "RID", "operand_pattern": "{{{invalid_parameter}}}"},
+                                    {"filter": "RID", "operand_pattern": "1"}
+                                ]},
+                                "RID"
+                            ]}
+                        ]
+                    }
+                }
+            }
+        },
+        "main_f3_assoc": {
+            "kind": "table",
+            "table_name": "main_f3_assoc",
+            "schema_name": "faceting_schema",
+            "comment": "association table between main and f3",
+            "keys": [
+                {"unique_columns": ["id_main", "id_f3"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "main_f3_assoc_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "id_main",
+                            "table_name": "main_f3_assoc",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "main",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                },
+                {
+                    "names": [["faceting_schema", "main_f3_assoc_fk2"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "id_f3",
+                            "table_name": "main_f3_assoc",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "f3",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id_main",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id_f3",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "f3": {
+            "kind": "table",
+            "table_name": "f3",
+            "schema_name": "faceting_schema",
+            "comment": "related to main via main_f3_assoc",
+            "keys": [
+                {"unique_columns":["id"]}
+            ],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "term",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ]
+        },
+        "f4": {
+            "kind": "table",
+            "table_name": "f4",
+            "schema_name": "faceting_schema",
+            "comment": "has fk to main table + has rowname",
+            "keys": [
+                {"unique_columns": ["id"], "names": [["faceting_schema", "f4_key_1"]]},
+                {"unique_columns": ["id_text"], "names": [["faceting_schema", "f4_key_2"]]},
+                {"unique_columns": ["id_timestamp"], "names": [["faceting_schema", "f4_key_3"]]},
+                {"unique_columns": ["id_float"], "names": [["faceting_schema", "f4_key_4"]]},
+                {"unique_columns": ["term"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f4_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_main",
+                            "table_name": "f4",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "main",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:foreign-key": {
+                            "from_name": "from_name",
+                            "to_name": "to_name"
+                        }
+                    }
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "int4"
+                    }
+                },
+                {
+                    "name": "id_text",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "id_timestamp",
+                    "nullok": false,
+                    "type": {
+                        "typename": "timestamp"
+                    }
+                },
+                {
+                    "name": "id_float",
+                    "nullok": false,
+                    "type": {
+                        "typename": "float4"
+                    }
+                },
+                {
+                    "name": "term",
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "int_col",
+                    "type": {
+                        "typename": "int4"
+                    }
+                },
+                {
+                    "name": "fk_to_main",
+                    "type": {
+                        "typename": "int4"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "compact": [
+                        ["faceting_schema", "f4_key_1"],["faceting_schema", "f4_key_2"], ["faceting_schema", "f4_key_3"],
+                         ["faceting_schema", "f4_key_4"],
+                        "term", ["faceting_schema", "f4_fk1"]
+                    ]
+                },
+                "tag:isrd.isi.edu,2016:visible-foreign-keys": {
+                    "detailed": [
+                        ["faceting_schema", "main_wo_annot_1_fkey1"]
+                    ]
+                },
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "row_name": {
+                        "row_markdown_pattern": "{{term}}"
+                    }
+                }
+            }
+        },
+        "main_wo_faceting_annot_1": {
+            "kind": "table",
+            "table_name": "main_wo_faceting_annot_1",
+            "schema_name": "faceting_schema",
+            "keys": [
+                {
+                    "names": [["faceting_schema", "main_wo_annot_1_key1"]],
+                    "unique_columns": ["id"]
+                },
+                {
+                    "names": [["faceting_schema", "main_wo_annot_1_key2"]],
+                    "unique_columns": ["id1", "id2"]
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "main_wo_annot_1_fkey1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_1",
+                            "table_name": "main_wo_faceting_annot_1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "f4",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                },
+                {
+                    "names": [["faceting_schema", "main_wo_annot_1_fkey2"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_2_1",
+                            "table_name": "main_wo_faceting_annot_1",
+                            "schema_name": "faceting_schema"
+                        },
+                        {
+                            "column_name": "fk_2_2",
+                            "table_name": "main_wo_faceting_annot_1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id1",
+                            "table_name": "main_wo_faceting_annot_2",
+                            "schema_name": "faceting_schema"
+                        },
+                        {
+                            "column_name": "id2",
+                            "table_name": "main_wo_faceting_annot_2",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "fk_1",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "fk_2_1",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "fk_2_2",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col_asset",
+                    "type": {
+                        "typename": "text"
+                    },
+                    "annotations": {
+                        "tag:isrd.isi.edu,2017:asset": {
+                            "url_pattern" : "/hatrac/js/ermrestjs/{{{_timestamp}}}/{{{_uri.md5_hex}}}"
+                        }
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "compact": [
+                        ["faceting_schema", "main_wo_annot_1_key2"],
+                        ["faceting_schema", "main_wo_annot_1_fkey2"],
+                        "col_asset"
+                    ]
+                },
+                "tag:isrd.isi.edu,2016:visible-foreign-keys": {
+                    "detailed": [
+                        ["faceting_schema", "main_wo_annot_2_fkey1"]
+                    ]
+                }
+            }
+        },
+        "main_wo_faceting_annot_2": {
+            "kind": "table",
+            "table_name": "main_wo_faceting_annot_2",
+            "schema_name": "faceting_schema",
+            "keys": [
+                {"unique_columns": ["id"]},
+                {"unique_columns": ["id1", "id2"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "main_wo_annot_2_fkey1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "id1",
+                            "table_name": "main_wo_faceting_annot_2",
+                            "schema_name": "faceting_schema"
+                        },
+                        {
+                            "column_name": "id2",
+                            "table_name": "main_wo_faceting_annot_2",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id1",
+                            "table_name": "main_wo_faceting_annot_1",
+                            "schema_name": "faceting_schema"
+                        },
+                        {
+                            "column_name": "id2",
+                            "table_name": "main_wo_faceting_annot_1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col_json",
+                    "type": {
+                        "typename": "json"
+                    }
+                },
+                {
+                    "name": "col_jsonb",
+                    "type": {
+                        "typename": "jsonb"
+                    }
+                },
+                {
+                    "name": "col_markdown",
+                    "type": {
+                        "typename": "markdown"
+                    }
+                },
+                {
+                    "name": "col_longtext",
+                    "type": {
+                        "typename": "longtext"
+                    }
+                },
+                {
+                    "name": "col_serial2",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col_serial4",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col_serial8",
+                    "type": {
+                        "typename": "serial8"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "compact": [
+                        "col_markdown", "col_longtext", "col_serial2", "col_serial4", "col_serial8"
+                    ]
+                },
+                "tag:isrd.isi.edu,2016:visible-foreign-keys": {
+                    "detailed": []
+                }
+            }
+        },
+        "longpath_1": {
+            "kind": "table",
+            "table_name": "longpath_1",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "longpath_1_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_1",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "main",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "longpath_2": {
+            "kind": "table",
+            "table_name": "longpath_2",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "longpath_2_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_2",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_1",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "longpath_3": {
+            "kind": "table",
+            "table_name": "longpath_3",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "longpath_3_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_3",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_2",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "longpath_4": {
+            "kind": "table",
+            "table_name": "longpath_4",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "longpath_4_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_4",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_3",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "longpath_5": {
+            "kind": "table",
+            "table_name": "longpath_5",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "longpath_5_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_5",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "longpath_4",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "annotations": {
+                        "tag:isrd.isi.edu,2016:foreign-key": {
+                            "from_name": "from_name"
+                        }
+                    }
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "filter": {
+                        "and": [
+                            {"sourcekey": "search-box", "choices": ["ignore"]},
+                            {"source": "id"}
+                        ]
+                    }
+                }
+            }
+        },
+        "secondpath_1": {
+            "kind": "table",
+            "table_name": "secondpath_1",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "secondpath_1_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "secondpath_1",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "main",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ]
+        },
+        "secondpath_2": {
+            "kind": "table",
+            "table_name": "secondpath_2",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "secondpath_2_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "secondpath_2",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "secondpath_1",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "filter": {
+                        "and": [
+                            {"source": "id"},
+                            {"sourcekey": "search-box", "search": ["term"]},
+                            {"sourcekey": "search-box", "search": ["second term"]}
+                        ]
+                    }
+                }
+            }
+        },
+        "table_w_alt": {
+            "kind": "table",
+            "table_name": "table_w_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id_table_w_alt"]}],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id_table_w_alt",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-alternatives": {
+                    "compact": ["faceting_schema", "alt_compact"]
+                }
+            }
+        },
+        "alt_compact": {
+            "kind": "table",
+            "table_name": "alt_compact",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id_compact"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "alt_compact_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id_compact",
+                        "table_name": "alt_compact",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_table_w_alt",
+                        "table_name": "table_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                },
+                {
+                    "names": [["faceting_schema", "alt_compact_fk2"]],
+                    "foreign_key_columns": [{
+                        "column_name": "col",
+                        "table_name": "alt_compact",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_f5",
+                        "table_name": "f5",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id_compact",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "f5": {
+            "comment": "alt_compact has fk to this table.",
+            "kind": "table",
+            "table_name": "f5",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id_f5"]}],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id_f5",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "f6": {
+            "comment": "has fk to table_w_alt",
+            "kind": "table",
+            "table_name": "f6",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id_f6"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f6_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id_f6",
+                        "table_name": "f6",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_table_w_alt",
+                        "table_name": "table_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id_f6",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "main_w_facets_w_alt": {
+            "comment": "has facets that have alternative table",
+            "kind": "table",
+            "table_name": "main_w_facets_w_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns" : {
+                    "compact": ["id"],
+                    "filter": {
+                        "and": [
+                            {"source": [{"inbound": ["faceting_schema", "f8_fk1"]}, "id_f8_2"], "entity": false},
+                            {"source": [{"inbound": ["faceting_schema", "f7_fk1"]}, "col"]}
+                        ]
+                    }
+                }
+            }
+        },
+        "f7_w_alt": {
+            "comment": "has alternative, and fk to id on the same id",
+            "kind": "table",
+            "table_name": "f7_w_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id_f7"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f7_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id_f7",
+                        "table_name": "f7_w_alt",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "main_w_facets_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id_f7",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "col",
+                    "type": {
+                        "typename": "text"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-alternatives": {
+                    "compact": ["faceting_schema", "f7_compact_alt"],
+                    "detailed": ["faceting_schema", "f7_detailed_alt"]
+                }
+            }
+        },
+        "f7_compact_alt": {
+            "kind": "table",
+            "table_name": "f7_compact_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f7_compact_alt_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "f7_compact_alt",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_f7",
+                        "table_name": "f7_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "f7_detailed_alt": {
+            "kind": "table",
+            "table_name": "f7_detailed_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f7_detailed_alt_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "f7_detailed_alt",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_f7",
+                        "table_name": "f7_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "f8_w_alt": {
+            "comment": "has alternative, and fk to main on differnt id",
+            "kind": "table",
+            "table_name": "f8_w_alt",
+            "schema_name": "faceting_schema",
+            "keys": [
+                {"unique_columns": ["id_f8_1"]},
+                {"unique_columns": ["id_f8_2"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f8_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id_f8_1",
+                        "table_name": "f8_w_alt",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id",
+                        "table_name": "main_w_facets_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id_f8_1",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                },
+                {
+                    "name": "id_f8_2",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-alternatives": {
+                    "compact": ["faceting_schema", "f8_compact_alt"]
+                }
+            }
+        },
+        "f8_compact_alt": {
+            "kind": "table",
+            "table_name": "f8_compact_alt",
+            "schema_name": "faceting_schema",
+            "keys": [{"unique_columns": ["id"]}],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "f8_compact_alt_fk1"]],
+                    "foreign_key_columns": [{
+                        "column_name": "id",
+                        "table_name": "f8_compact_alt",
+                        "schema_name": "faceting_schema"
+                    }],
+                    "referenced_columns": [{
+                        "column_name": "id_f8_2",
+                        "table_name": "f8_w_alt",
+                        "schema_name": "faceting_schema"
+                    }]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "serial4"
+                    }
+                }
+            ],
+            "annotations": {}
+        },
+        "table_w_array": {
+            "kind": "table",
+            "table_name": "table_w_array",
+            "schema_name": "faceting_schema",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {
+                        "typename": "text"
+                    }
+                },
+                {
+                    "name": "text_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "text[]",
+                        "base_type": {
+                            "typename": "text"
+                        }
+                    }
+                },
+                {
+                    "name": "boolean_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "boolean[]",
+                        "base_type": {
+                            "typename": "boolean"
+                        }
+                    }
+                },
+                {
+                    "name": "date_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "date[]",
+                        "base_type": {
+                            "typename": "date"
+                        }
+                    }
+                },
+                {
+                    "name": "timestamp_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "timestamp[]",
+                        "base_type": {
+                            "typename": "timestamp"
+                        }
+                    }
+                },
+                {
+                    "name": "timestamptz_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "timestamptz[]",
+                        "base_type": {
+                            "typename": "timestamptz"
+                        }
+                    }
+                },
+                {
+                    "name": "float4_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "float4[]",
+                        "base_type": {
+                            "typename": "float4"
+                        }
+                    }
+                },
+                {
+                    "name": "float8_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "float8[]",
+                        "base_type": {
+                            "typename": "float8"
+                        }
+                    }
+                },
+                {
+                    "name": "numeric_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "numeric[]",
+                        "base_type": {
+                            "typename": "numeric"
+                        }
+                    }
+                },
+                {
+                    "name": "int2_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int2[]",
+                        "base_type": {
+                            "typename": "int2"
+                        }
+                    }
+                },
+                {
+                    "name": "int4_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int4[]",
+                        "base_type": {
+                            "typename": "int4"
+                        }
+                    }
+                },
+                {
+                    "name": "int8_array",
+                    "type": {
+                        "is_array": true,
+                        "typename": "int8[]",
+                        "base_type": {
+                            "typename": "int8"
+                        }
+                    }
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:visible-columns": {
+                    "filter": {
+                        "and": [
+                            "text_array", "boolean_array", "date_array", "timestamp_array",
+                            "timestamptz_array", "float4_array", "float8_array", "numeric_array",
+                            "int2_array", "int4_array", "int8_array"
+                        ]
+                    }
+                }
+            }
+        },
+        "path_prefix_o1": {
+            "kind": "table",
+            "table_name": "path_prefix_o1",
+            "schema_name": "parse_schema",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "path_prefix_o1_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_path_prefix_o1_o1",
+                            "table_name": "path_prefix_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "path_prefix_o1_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "fk_to_path_prefix_o1_o1",
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "path_prefix_o1_col",
+                    "type": {"typename": "text"}
+                },
+                {
+                    "name": "date_col",
+                    "type": {"typename": "date"}
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "row_name": {
+                        "row_markdown_pattern": "**{{path_prefix_o1_col}}**"
+                    }
+                }
+            }
+        },
+        "path_prefix_o1_o1": {
+            "kind": "table",
+            "table_name": "path_prefix_o1_o1",
+            "schema_name": "parse_schema",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "path_prefix_o1_o1_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_path_prefix_o1_o1_o1",
+                            "table_name": "path_prefix_o1_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "path_prefix_o1_o1_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "fk_to_path_prefix_o1_o1_o1",
+                    "type": {"typename": "serial4"}
+                },
+                {
+                    "name": "path_prefix_o1_o1_col",
+                    "type": {"typename": "text"}
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "row_name": {
+                        "row_markdown_pattern": "**{{path_prefix_o1_o1_col}}**"
+                    }
+                }
+            }
+        },
+        "path_prefix_o1_o1_o1": {
+            "kind": "table",
+            "table_name": "path_prefix_o1_o1_o1",
+            "schema_name": "parse_schema",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "path_prefix_o1_o1_o1_col",
+                    "type": {"typename": "text"}
+                }
+            ]
+        },
+        "path_prefix_o1_o1_i1": {
+            "kind": "table",
+            "table_name": "path_prefix_o1_o1_i1",
+            "schema_name": "parse_schema",
+            "keys": [
+                {"unique_columns": ["id"]}
+            ],
+            "foreign_keys": [
+                {
+                    "names": [["faceting_schema", "path_prefix_o1_o1_i1_fk1"]],
+                    "foreign_key_columns": [
+                        {
+                            "column_name": "fk_to_path_prefix_o1_o1",
+                            "table_name": "path_prefix_o1_o1_i1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ],
+                    "referenced_columns": [
+                        {
+                            "column_name": "id",
+                            "table_name": "path_prefix_o1_o1",
+                            "schema_name": "faceting_schema"
+                        }
+                    ]
+                }
+            ],
+            "column_definitions": [
+                {
+                    "name": "id",
+                    "nullok": false,
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "fk_to_path_prefix_o1_o1",
+                    "type": {"typename": "int4"}
+                },
+                {
+                    "name": "path_prefix_o1_o1_i1_col",
+                    "type": {"typename": "text"}
+                }
+            ],
+            "annotations": {
+                "tag:isrd.isi.edu,2016:table-display": {
+                    "row_name": {
+                        "row_markdown_pattern": "**{{path_prefix_o1_o1_i1_col}}**"
+                    }
+                }
+            }
+        }
+
+    }
+}

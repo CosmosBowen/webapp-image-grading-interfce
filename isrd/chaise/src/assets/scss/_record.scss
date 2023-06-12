@@ -1,0 +1,394 @@
+@use 'sass:map';
+@use 'variables';
+
+.record-container {
+  .top-panel-container {
+    padding-bottom: 10px;
+
+    .top-flex-panel {
+      .top-right-panel {
+        .page-action-btns {
+          height: variables.$btn-height;
+          margin: 0;
+
+          > div {
+            display: flex;
+          }
+
+          .chaise-btn {
+            margin-left: 5px;
+          }
+        }
+
+        .title {
+          padding-top: 20px;
+
+          #page-subtitle {
+            margin: 5px 0px;
+          }
+
+          .entity-display-header {
+            position: relative;
+
+            .page-title-container {
+              width: 100%;
+              display: inline-block;
+              #page-title {
+                margin: 0px;
+              }
+            }
+
+            .record-action-btns-container {
+              font-size: 1rem;
+              padding-top: 7px;
+              width: 330px;
+            }
+          } // end .entity-display-header
+        } // end .title
+
+        .show-toc-btn {
+          margin-top: 10px;
+          padding-left: 2px;
+          padding-bottom: 0px;
+        }
+      } // end .top-right-panel
+    }
+  }
+
+  .bottom-panel-container {
+    .main-container {
+      padding-right: 20px;
+    }
+
+    /** bottom left panel **/
+    > .side-panel-resizable {
+
+      .side-panel-container {
+        height: 100%;
+        overflow-y: auto;
+
+        .side-panel-heading {
+          margin: 0px;
+        }
+      }
+
+      .columns-container {
+        margin-left: 10px;
+
+        ul {
+          padding-left: 0px;
+        }
+
+        .toc-heading {
+          padding: 4px 10px 4px 0px;
+          cursor: pointer;
+          font-size: variables.$h4-font-size;
+
+          & > a.empty-toc-heading {
+            opacity: 0.55;
+          }
+
+          &:hover {
+            background-color: rgb(241, 241, 241);
+          }
+        }
+
+        .toc-inline-heading {
+          font-size: 1rem;
+          padding-left: 20px;
+        }
+
+        #rt-toc-loading {
+          padding: 10px 5px 5px;
+        }
+      }
+    }
+
+    .related-table-actions {
+      float: right;
+
+      .chaise-btn:not(:first-child) {
+        margin-left: 5px;
+      }
+
+      a.chaise-btn {
+        text-decoration: none;
+      }
+    }
+
+    /******Related Entities in record **************/
+
+    .row-focus {
+      border: map-get(variables.$record-spacing-map, 'row-focus-border-width') solid map-get(variables.$color-map, 'primary') !important;
+    }
+
+    .chaise-table-header {
+      padding-bottom: 5px;
+    }
+
+    .chaise-table-pagination {
+      padding-top: 10px;
+      padding-bottom: 0px;
+    }
+
+    .loading-text {
+      color: #446c73;
+      font-weight: 600;
+    }
+
+  }
+
+  .related-section-spinner {
+    color: #446c73;
+    font-weight: 600;
+  }
+
+  /********* print ********/
+
+  @media print {
+    * {
+      -webkit-transition: none !important;
+      transition: none !important;
+    }
+
+    .bottom-panel-container {
+      height: auto !important;
+      display: block;
+    }
+
+    .top-right-panel {
+      //Action button top right corner
+      .page-action-btns {
+        display: none;
+      }
+
+      //Creat,Copy,Edit and Del Buttons
+      .title-buttons {
+        display: none;
+      }
+    }
+
+    //Sections
+    .top-left-panel {
+      display: none;
+    }
+
+    //Side panel
+    .side-panel-container {
+      display: none;
+    }
+
+    //three dots
+    .rg-right {
+      display: none;
+    }
+
+    // related action buttons
+    .related-table-actions {
+      display: none;
+    }
+
+    // back to top button
+    .back-to-top-btn {
+      display: none;
+    }
+
+    //Side space
+    #record-side-pan {
+      display: none;
+    }
+
+    //Column widths in the table
+    .bottom-panel-container {
+      .table {
+        .entity-key {
+          padding-left: 20px;
+          width: 15%;
+          min-width: 150px;
+          float: left;
+        }
+
+        .entity-value {
+          width: 85%;
+          padding-left: 15%;
+          padding-right: 8px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+      }
+    }
+
+    .table-heading-icons {
+      display: none;
+    }
+
+    // for mac and firefox
+    @at-root .chaise-mac.chaise-firefox {
+      .record-main-section-table {
+        .entity-key {
+          padding-left: 20px;
+          width: 20%;
+          min-width: 150px;
+          float: left;
+        }
+
+        .entity-value {
+          width: 80%;
+          padding-left: 15%;
+          padding-right: 8px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+      }
+    }
+
+    .chaise-table.table {
+      border-top: 1px solid #bbbbbb;
+      border-bottom: 1px solid #bbbbbb;
+
+      tr {
+        border-left: 1px solid #bbbbbb;
+        border-bottom: none;
+      }
+
+      > thead > tr > th,
+      > tbody > tr > th,
+      > tfoot > tr > th,
+      > thead > tr > td,
+      > tbody > tr > td,
+      > tfoot > tr > td {
+        border-top: none;
+        border-right: 1px solid #bbbbbb;
+      }
+
+      th {
+        background-color: unset !important;
+        border-top: none;
+        border-bottom: 1px solid #bbbbbb;
+      }
+    }
+
+    .chaise-accordion-header {
+      font-size: 1.5rem !important;
+    }
+
+    //Prev and Next buttons
+    .bottom-panel-container {
+      .chaise-table-pagination {
+        display: none;
+      }
+    }
+
+    #footer {
+      display: none;
+    }
+
+    .chaise-accordion {
+      break-inside: avoid !important;
+    }
+
+    //Round blobs of links
+    .markdown-container {
+      .vocab {
+        padding: 2px !important;
+        margin: 2px !important;
+      }
+    }
+
+    #page-title {
+      font-size: 1.75rem !important;
+    }
+
+    //Removes bubbles and represents the vocab as a dot separated list
+    .related-section-container {
+      .vocab + .vocab::before {
+        content: "\2022" !important;
+        padding-right: 6px;
+      }
+
+      .markdown-container a:last-child:after {
+        content: none !important;
+      }
+    }
+
+    .chaise-icon-for-tooltip::after {
+      content: none !important;
+    }
+
+    a[href]:after {
+      content: none !important;
+    }
+
+    //Removing button styling from Display record information
+    .page-size-dropdown {
+      border: none !important;
+      padding: 0px;
+      margin-bottom: 2.5px;
+      min-width: unset !important;
+    }
+
+    //Removing the dropdown button from Display record information
+    .caret {
+      display: none !important;
+    }
+
+    .fa-chevron-down:before {
+      font-size: 1.2rem !important;
+    }
+
+    //Sort icons in record table
+    .fa-arrows-alt-v {
+      display: none;
+    }
+
+    //Hiding the 1st column (Actions) in Record Table
+    record-table th:nth-child(1),
+    record-table td:nth-child(1) {
+      display: none;
+    }
+
+    #no-results-row {
+      display: table-cell !important;
+      text-align: left !important;
+      padding-left: 150px !important;
+    }
+
+    record-table {
+      empty-cells: show !important;
+    }
+
+    //Hide in Print
+    .hide-in-print {
+      display: none !important;
+    }
+
+    //In print we hide YouTube and other videos. This class is then made visible to display the relevant info in print mode
+    .video-info-in-print {
+      /*
+            * NOTE: we're using display because visibility:hidden had aligment issues.
+            * With visibility hidden eventhough the element is invisibile, it will still take up space,
+            * and will add extra unnecessary space between the iframe and fullscreen button.
+            */
+      display: block !important;
+    }
+
+    alerts {
+      display: none !important;
+    }
+
+    @page {
+      size: auto;
+      margin: 5% 3% 5% 3%;
+
+      .markdown-container {
+        .vocab {
+          box-decoration-break: clone !important;
+        }
+      }
+
+      .record-table {
+        box-decoration-break: clone !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "setup": {
+        "schemaConfigurations": [
+            "navbar/catalog-chaise-config.config.json",
+            "record/config.json",
+            "recordedit/delete.config.json",
+            "recordset/ind-facet.config.json",
+            "recordset/histogram-facet.config.json"
+        ]
+    },
+    "cleanup" : true
+}
