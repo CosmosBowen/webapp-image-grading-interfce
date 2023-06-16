@@ -11,8 +11,8 @@ import UrlParamsComponent from '../components/urlParams';
 
 
 const myappSettings = {
-    appName: 'app/grading-interface',
-    appTitle: 'Grading-interface App',
+    appName: 'app/main',
+    appTitle: 'Grading Interface',
     overrideHeadTitle: false,
     overrideImagePreviewBehavior: false,
     overrideDownloadClickBehavior: false,
