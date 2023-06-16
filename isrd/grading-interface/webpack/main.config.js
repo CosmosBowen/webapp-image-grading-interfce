@@ -17,7 +17,7 @@ module.exports = (env) => {
   return getWebPackConfig(
     [
       {
-        appName: 'grading-interface',
+        appName: 'main',
         appTitle: 'Grading Interface'
       }
     ],
