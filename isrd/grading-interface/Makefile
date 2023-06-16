@@ -1,7 +1,7 @@
 # Disable built-in rules
 .SUFFIXES:
 
-
+NODE_ENV=production
 # make sure NOD_ENV is defined (use production if not defined or invalid)
 ifneq ($(NODE_ENV),development)
 NODE_ENV:=production

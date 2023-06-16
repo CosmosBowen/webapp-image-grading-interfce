@@ -14,7 +14,7 @@ console.log("dataset_rid:", dataset_rid);
 const diagnosis_rid = "C1T4";
 
 let newURL = '';
-if (dataset_rid && diagnosis_rid) {
+if (dataset_rid) { // && diagnosis_rid
     // const newQueryParams = new URLSearchParams({ dataset_rid });
     // newURL = `https://eye-ai.org/app/annotate?${newQueryParams.toString()}`;
     // console.log("new url:", newURL);
