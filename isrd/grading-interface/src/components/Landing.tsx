@@ -59,7 +59,7 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            const data_url = `https://dev.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
+            const data_url = `https://www.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
             // const url = `https://dev.eye-ai.org/Dataset=${dataset_rid}//Diagnosis_Tag=${diagnosis_rid}/Diagnosis:Cup%2FDisk_Ratio`
             console.log("generate url:", data_url);
 
