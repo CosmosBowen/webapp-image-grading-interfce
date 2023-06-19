@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import DetailsComponent from './detail-hotkey';
 
-const host = window.location.href//https://dev.eye-ai.org/
-console.log("window.location.href:", host);
-const split = host.split('eye-ai.org/');
-console.log("split:", split, split[0])
-console.log("if it's dev:", "https://dev." === split[0])
+const host = window.location.host;
+console.log("window.location.host:", host);
+let url_host = 'www';
+console.log("if it's dev:", "https://dev." === host.split('eye-ai.org/')[0])
+if (host.split('eye-ai.org/')[0] === "https://dev.") {
+    url_host = 'dev';
+}
 
 //queryString: ?dataset_rid=V76G
 const queryString = window.location.search;
@@ -52,8 +54,7 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            // if(host.split('eye-ai.org/'))
-            const data_url = `https://dev.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
+            const data_url = `https://${url_host}.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
             // const url = `https://dev.eye-ai.org/Dataset=${dataset_rid}//Diagnosis_Tag=${diagnosis_rid}/Diagnosis:Cup%2FDisk_Ratio`
             console.log("generate url:", data_url);
 
@@ -103,7 +104,7 @@ const UrlReaderComponent = () => {
 
                     {tags && Array.isArray(tags) &&
                         <select className='chaise-input-group' value={selectedTag} onChange={handleTagsChange}>
-                            <option value="empty">--Please choose an option--</option>
+                            <option value="empty">--Select a Diagnosis Tag--</option>
                             {tags.map((option) => (
                                 <option key={option.RID} value={option.RID}>
                                     {option.Name}
@@ -115,6 +116,9 @@ const UrlReaderComponent = () => {
 
 
                 </div>
+
+                {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>}
+
                 {jsonData && (
                     <button className='chaise-btn chaise-btn-primary' onClick={saveData}>Quit</button>
                 )}
