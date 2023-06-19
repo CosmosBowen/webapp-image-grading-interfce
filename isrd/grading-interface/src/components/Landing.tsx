@@ -3,7 +3,7 @@ import axios from 'axios';
 import DetailsComponent from './detail-hotkey';
 
 const host = window.location.host;
-console.log("window.location.host:", host, "host_url:", host.split('.'));
+console.log("window.location.host:", host, "host_url:", host.split('.')[0]);
 
 //queryString: ?dataset_rid=V76G
 const queryString = window.location.search;
@@ -64,8 +64,10 @@ const UrlReaderComponent = () => {
                 try {
                     // const response = await axios.get(url);
                     const response = await axios.get(data_url);
+                    if (response.data.Length !== 0) {
+                        setJsonData(response.data);
+                    }
 
-                    setJsonData(response.data);
 
                     console.log("Fetched data:", response.data);
                 } catch (error) {
@@ -112,13 +114,16 @@ const UrlReaderComponent = () => {
 
                 </div>
 
-                {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>}
+                {/* {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>} */}
 
                 {jsonData && (
                     <button className='chaise-btn chaise-btn-primary' onClick={saveData}>Quit</button>
                 )}
 
             </div>
+            {jsonData === null && (
+                <p> No available data. Please go back.</p>
+            )}
 
             {jsonData && (
                 <>
