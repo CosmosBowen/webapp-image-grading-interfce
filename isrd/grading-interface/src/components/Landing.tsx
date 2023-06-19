@@ -2,6 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import DetailsComponent from './detail-hotkey';
 
+const host = window.location.href//https://dev.eye-ai.org/
+console.log("window.location.href:", host);
+const split = host.split('eye-ai.org/');
+console.log("split:", split, split[0])
+console.log("if it's dev:", "https://dev." === split[0])
 
 //queryString: ?dataset_rid=V76G
 const queryString = window.location.search;
@@ -9,18 +14,6 @@ const urlParams = new URLSearchParams(queryString);
 //dataset_rid: C0G2/V76G
 const dataset_rid = urlParams.get('dataset_rid')
 console.log("dataset_rid:", dataset_rid);
-//diagnosis_rid: C1T4
-//diagnosis_rid: M7NW
-// const diagnosis_rid = "C1T4";
-
-let newURL = '';
-// if (dataset_rid) { // && diagnosis_rid
-//     // const newQueryParams = new URLSearchParams({ dataset_rid });
-//     // newURL = `https://eye-ai.org/app/annotate?${newQueryParams.toString()}`;
-//     // console.log("new url:", newURL);
-//     newURL = `https://dev.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
-//     console.log("new url:", newURL);
-// }
 
 
 const UrlReaderComponent = () => {
@@ -59,7 +52,8 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            const data_url = `https://www.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
+            // if(host.split('eye-ai.org/'))
+            const data_url = `https://dev.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
             // const url = `https://dev.eye-ai.org/Dataset=${dataset_rid}//Diagnosis_Tag=${diagnosis_rid}/Diagnosis:Cup%2FDisk_Ratio`
             console.log("generate url:", data_url);
 
