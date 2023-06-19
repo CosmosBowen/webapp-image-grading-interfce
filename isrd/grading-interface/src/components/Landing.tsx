@@ -3,12 +3,7 @@ import axios from 'axios';
 import DetailsComponent from './detail-hotkey';
 
 const host = window.location.host;
-console.log("window.location.host:", host);
-let url_host = 'www';
-console.log("if it's dev:", "https://dev." === host.split('eye-ai.org/')[0])
-if (host.split('eye-ai.org/')[0] === "https://dev.") {
-    url_host = 'dev';
-}
+console.log("window.location.host:", host, "host_url:", host.split('.'));
 
 //queryString: ?dataset_rid=V76G
 const queryString = window.location.search;
@@ -54,7 +49,7 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            const data_url = `https://${url_host}.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
+            const data_url = `https://${host.split('.')[0]}.eye-ai.org/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
             // const url = `https://dev.eye-ai.org/Dataset=${dataset_rid}//Diagnosis_Tag=${diagnosis_rid}/Diagnosis:Cup%2FDisk_Ratio`
             console.log("generate url:", data_url);
 
