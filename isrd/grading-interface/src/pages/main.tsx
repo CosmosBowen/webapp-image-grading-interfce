@@ -5,7 +5,8 @@ import AppWrapper from '@isrd-isi-edu/chaise/src/components/app-wrapper';
 import { ID_NAMES } from '@isrd-isi-edu/chaise/src/utils/constants';
 
 import FileReaderComponent from '@isrd-isi-edu/deriva-react-app/src/components/FileReader';
-import UrlReaderComponent from '../components/UrlReader';
+import UrlReaderComponent from '../components/Landing';
+// import UrlReaderComponent from '../components/UrlReader';
 import UrlParamsComponent from '../components/urlParams';
 // import ExampleComponent from '@isrd-isi-edu/deriva-react-app/src/components/example';
 

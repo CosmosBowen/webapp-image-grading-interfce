@@ -1,6 +1,7 @@
 # Disable built-in rules
 .SUFFIXES:
 
+#customize to deploy to prod server
 NODE_ENV=production
 # make sure NOD_ENV is defined (use production if not defined or invalid)
 ifneq ($(NODE_ENV),development)
