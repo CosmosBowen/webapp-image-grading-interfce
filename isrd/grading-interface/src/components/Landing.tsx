@@ -24,7 +24,7 @@ const UrlReaderComponent = () => {
     const [tags, setTags] = useState<Tag[] | null>(null);
     const [selectedTag, setSelectedTag] = useState("empty");
 
-    const [jsonData, setJsonData] = useState(null);
+    const [jsonData, setJsonData] = useState<[] | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement>(null);
 
 
@@ -50,8 +50,10 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            // const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Image_Dataset:=eye-ai:Image_Dataset/Dataset=${dataset_rid}/Image:=eye-ai:Image/Diagnosis:=eye-ai:Diagnosis/Diagnosis_Tag=${diagnosis_rid}/Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Cup%2FDisk_Ratio`
-            const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`;
+            const data_url = 'http://localhost:8080/data';
+            // const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`
+            // const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`
+            // const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`;
             console.log("generate url:", data_url);
 
             const fetchData = async () => {
@@ -66,11 +68,12 @@ const UrlReaderComponent = () => {
                     // const response = await axios.get(url);
                     const response = await axios.get(data_url);
                     if (response.data.Length !== 0) {
+                        console.log("GET DATA!", response.data);
                         setJsonData(response.data);
+                    } else {
+                        console.log("Fetched data NULL", response.data);
                     }
 
-
-                    console.log("Fetched data:", response.data);
                 } catch (error) {
                     console.error('Failed to fetch data:', error);
                 }
@@ -117,7 +120,7 @@ const UrlReaderComponent = () => {
 
                 {/* {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>} */}
 
-                {jsonData && (
+                {jsonData && jsonData.length > 0 && (
                     <button className='chaise-btn chaise-btn-primary' onClick={saveData}>Quit</button>
                 )}
 
@@ -126,7 +129,7 @@ const UrlReaderComponent = () => {
                 <p> No available data. Please go back.</p>
             )} */}
 
-            {jsonData && (
+            {jsonData && jsonData.length > 0 && (
                 <>
                     <DetailsComponent jsonData={jsonData} />
                     <a ref={downloadLinkRef} style={{ display: 'none' }}>Download</a>
