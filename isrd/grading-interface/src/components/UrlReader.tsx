@@ -77,14 +77,14 @@ const UrlReaderComponent = () => {
 
             </div>
 
-            {jsonData && (
+            {/* {jsonData && (
                 <>
                     <DetailsComponent jsonData={jsonData} />
                     <a ref={downloadLinkRef} style={{ display: 'none' }}>Download</a>
                 </>
 
 
-            )}
+            )} */}
         </div>
 
 

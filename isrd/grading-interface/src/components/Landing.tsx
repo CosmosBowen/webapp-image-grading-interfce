@@ -25,10 +25,10 @@ const UrlReaderComponent = () => {
     const [selectedTag, setSelectedTag] = useState("empty");
 
     const [Image_Quality, set_Image_Quality] = useState<Tag[] | null>(null);
-    const [selected_Image_Quality, setSelected_Image_Quality] = useState("empty");
+    // const [selected_Image_Quality, setSelected_Image_Quality] = useState("empty");
 
     const [Diagnosis_Vocab, set_Diagnosis_Vocab] = useState<Tag[] | null>(null);
-    const [selected_Diagnosis_Vocab, setSelected_Diagnosis_Vocab] = useState("empty");
+    // const [selected_Diagnosis_Vocab, setSelected_Diagnosis_Vocab] = useState("empty");
 
     const [jsonData, setJsonData] = useState<[] | null>(null);
     const downloadLinkRef = useRef<HTMLAnchorElement>(null);
@@ -36,16 +36,15 @@ const UrlReaderComponent = () => {
 
     useEffect(() => {
 
-        // fetch('http://localhost:8080/tags')
         fetch(`https://${host}/ermrest/catalog/eye-ai/attribute/eye-ai:Diagnosis_Tag/RID,Name`)
             .then(res => {
                 return res.json();
             })
             .then((data: Tag[]) => {
-                console.log("Image_Quality options:", data);
+                console.log("Diagnosis_Tag options:", data);
                 setTags(data)
                 setSelectedTag("empty");
-                console.log("useEffect selectedTag:", selectedTag);
+                console.log("useEffect selected Diagnosis_Tag:", selectedTag);
 
             })
 
@@ -54,37 +53,37 @@ const UrlReaderComponent = () => {
                 return res.json();
             })
             .then((data: Tag[]) => {
-                console.log("Diagnosis_Vocab options:", data);
+                console.log("Image_Quality options:", data);
                 set_Image_Quality(data)
-                setSelected_Image_Quality("empty");
-                console.log("useEffect selectedTag:", selectedTag);
+                // setSelected_Image_Quality("empty");
+                console.log("useEffect selected Image_Quality:", selectedTag);
 
             })
 
-        fetch(`https://${host}/ermrest/catalog/eye-ai/entity/Diagnosis_Image_Vocab:=eye-ai:Diagnosis_Image_Vocab`)
+        fetch(`https://${host}/ermrest/catalog/eye-ai/entity/Diagnosis_ImageDiagnosis:=eye-ai:Diagnosis_Image_Vocab`)
             .then(res => {
                 return res.json();
             })
             .then((data: Tag[]) => {
-                console.log("diagnosis_tag options:", data);
+                console.log("Diagnosis_Vocab options:", data);
                 set_Diagnosis_Vocab(data)
-                setSelected_Diagnosis_Vocab("empty");
-                console.log("useEffect selectedTag:", selectedTag);
+                // setSelected_Diagnosis_Vocab("empty");
+                console.log("useEffect selected Diagnosis_Vocab:", selectedTag);
 
             })
     }, []);  // empty dependency array means this effect runs once on mount
 
-    const handle_Image_Quality_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const Image_Quality_RID = event.target.value
-        setSelected_Image_Quality(Image_Quality_RID);
-        console.log("choose <Image_Quality>:", Image_Quality_RID);
-    }
+    // const handle_Image_Quality_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const Image_Quality_RID = event.target.value
+    //     setSelected_Image_Quality(Image_Quality_RID);
+    //     console.log("choose <Image_Quality>:", Image_Quality_RID);
+    // }
 
-    const handle_Diagnosis_Vocab_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const Diagnosis_Vocab_RID = event.target.value
-        setSelected_Diagnosis_Vocab(Diagnosis_Vocab_RID);
-        console.log("choose <Diagnosis_Vocab>:", Diagnosis_Vocab_RID);
-    }
+    // const handle_Diagnosis_Vocab_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const Diagnosis_Vocab_RID = event.target.value
+    //     setSelected_Diagnosis_Vocab(Diagnosis_Vocab_RID);
+    //     console.log("choose <Diagnosis_Vocab>:", Diagnosis_Vocab_RID);
+    // }
 
     const handleTagsChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const diagnosis_rid = event.target.value
@@ -153,7 +152,7 @@ const UrlReaderComponent = () => {
                         </select>
                     }
 
-                    {Image_Quality && Array.isArray(Image_Quality) &&
+                    {/* {Image_Quality && Array.isArray(Image_Quality) &&
                         <>
                             <p>Image_Quality</p>
                             <select className='chaise-input-group' value={selected_Image_Quality} onChange={handle_Image_Quality_Change}>
@@ -165,9 +164,9 @@ const UrlReaderComponent = () => {
                                 ))}
                             </select>
                         </>
-                    }
+                    } */}
 
-                    {Diagnosis_Vocab && Array.isArray(Diagnosis_Vocab) &&
+                    {/* {Diagnosis_Vocab && Array.isArray(Diagnosis_Vocab) &&
                         <>
                             <p>Diagnosis_Vocab</p>
                             <select className='chaise-input-group' value={selected_Diagnosis_Vocab} onChange={handle_Diagnosis_Vocab_Change}>
@@ -179,7 +178,7 @@ const UrlReaderComponent = () => {
                                 ))}
                             </select>
                         </>
-                    }
+                    } */}
 
 
 
@@ -192,18 +191,20 @@ const UrlReaderComponent = () => {
                 )} */}
 
             </div>
+
             {jsonData && jsonData.length === 0 && (
                 <p> No available data. Please go back.</p>
             )}
 
-            {jsonData && jsonData.length > 0 && (
-                <>
-                    <DetailsComponent jsonData={jsonData} />
-                    <a ref={downloadLinkRef} style={{ display: 'none' }}>Download</a>
-                </>
+            {jsonData && jsonData.length > 0 && Image_Quality && Array.isArray(Image_Quality) && Diagnosis_Vocab && Array.isArray(Diagnosis_Vocab) &&
+                (
+                    <>
+                        <DetailsComponent jsonData={jsonData} Image_Quality={Image_Quality} Diagnosis_Vocab={Diagnosis_Vocab} />
+                        <a ref={downloadLinkRef} style={{ display: 'none' }}>Download</a>
+                    </>
 
 
-            )}
+                )}
         </div>
 
 

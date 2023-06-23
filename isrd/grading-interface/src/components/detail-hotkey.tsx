@@ -22,24 +22,37 @@ type ImageData = {
     Comments?: string; // Optional Comments field
 };
 
+type Tag = {
+    RID: string;
+    Name: string;
+};
+
 type Props = {
     jsonData: ImageData[];
+    Image_Quality: Tag[];
+    Diagnosis_Vocab: Tag[];
 };
 
 
-const DetailsComponent = ({ jsonData }: Props) => {
+const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) => {
 
 
-    const element1Ref = useRef<HTMLSelectElement | null>(null);
-    const element2Ref = useRef<HTMLSelectElement | null>(null);
-    const element3Ref = useRef<HTMLSelectElement | null>(null);
+    const Ref_CDR = useRef<HTMLSelectElement | null>(null);
+    const Ref_Image_Quality = useRef<HTMLSelectElement | null>(null);
+    const Ref_Diagnosis_Vocab = useRef<HTMLSelectElement | null>(null);
+
+    const CDR_list = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+    // const element1Ref = useRef<HTMLSelectElement | null>(null);
+    // const element2Ref = useRef<HTMLSelectElement | null>(null);
+    // const element3Ref = useRef<HTMLSelectElement | null>(null);
 
     //Cup/Disk_Ratio
-    const dropdown1 = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    // const dropdown1 = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     //Image_Quality_Vocab.Name
-    const dropdown2 = ["Good", "Bad"]
+    // const dropdown2 = ["Good", "Bad"]
     //Diagnosis_Image_Vocab.Name
-    const dropdown3 = ["No Glaucoma", "Suspected Glaucoma"]
+    // const dropdown3 = ["No Glaucoma", "Suspected Glaucoma"]
 
     const numberMax = jsonData.length;
     const handleSliderChange = (value: number) => {
@@ -52,9 +65,16 @@ const DetailsComponent = ({ jsonData }: Props) => {
 
     const [imageUrl, setImageUrl] = useState(currentObject['URL']);
     // const [imageUrl, setImageUrl] = useState(currentObject['URL']);
-    const [selectedValue1, setSelectedValue1] = useState(currentObject['Cup/Disk_Ratio']);
-    const [selectedValue2, setSelectedValue2] = useState(currentObject['Image_Quality_Vocab.Name']);
-    const [selectedValue3, setSelectedValue3] = useState(currentObject['Diagnosis_Image_Vocab.Name']);
+
+
+
+    const [selected_CDR, setSelected_CDR] = useState(currentObject['Cup/Disk_Ratio']);
+    const [selected_Image_Quality, setSelected_Image_Quality] = useState(currentObject['Image_Quality_Vocab.Name']);
+    const [selected_Diagnosis_Vocab, setSelected_Diagnosis_Vocab] = useState(currentObject['Diagnosis_Image_Vocab.Name']);
+
+    // const [selectedValue1, setSelectedValue1] = useState(currentObject['Cup/Disk_Ratio']);
+    // const [selectedValue2, setSelectedValue2] = useState(currentObject['Image_Quality_Vocab.Name']);
+    // const [selectedValue3, setSelectedValue3] = useState(currentObject['Diagnosis_Image_Vocab.Name']);
     const [comments, setComments] = useState(currentObject['Comments']);
     const [showComments, setShowComments] = useState(
         (currentObject['Comments'] === undefined || currentObject['Comments'] === '') ? false : true
@@ -90,19 +110,19 @@ const DetailsComponent = ({ jsonData }: Props) => {
         setImageUrl(currentObject['URL']);
         // setImageUrl(currentObject['URL']);
         // console.log("image:", imageUrl);
-        setSelectedValue1(currentObject['Cup/Disk_Ratio']);
-        setSelectedValue2(currentObject['Image_Quality_Vocab.Name']);
+        setSelected_CDR(currentObject['Cup/Disk_Ratio']);
+        setSelected_Image_Quality(currentObject['Image_Quality_Vocab.Name']);
         // console.log("current 1:", currentObject['Cup/Disk_Ratio']);
         // setSelectedValue3(currentObject['Diagnosis_Image_Vocab.Name']);
         if (currentObject['Diagnosis_Image_Vocab.Name'] === '') {
             // console.log("initial value3")
             const initialValue3 = currentObject['Cup/Disk_Ratio'] >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
             currentObject['Diagnosis_Image_Vocab.Name'] = initialValue3;
-            setSelectedValue3(initialValue3);
+            setSelected_Diagnosis_Vocab(initialValue3);
             // console.log("*1:", currentObject['Cup/Disk_Ratio']);
             // console.log("*3:", initialValue3);
         } else {
-            setSelectedValue3(currentObject['Diagnosis_Image_Vocab.Name']);
+            setSelected_Diagnosis_Vocab(currentObject['Diagnosis_Image_Vocab.Name']);
         }
 
         if (currentObject['Comments'] === undefined || currentObject['Comments'] === '') {
@@ -130,9 +150,9 @@ const DetailsComponent = ({ jsonData }: Props) => {
         // jsonData[currentIndex]['Cup/Disk_Ratio'] = element1Ref.current.value;
         // jsonData[currentIndex]['Image_Quality_Vocab.Name'] = element2Ref.current.value;
         // jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = element3Ref.current.value;
-        jsonData[currentIndex]['Cup/Disk_Ratio'] = selectedValue1;
-        jsonData[currentIndex]['Image_Quality_Vocab.Name'] = selectedValue2;
-        jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = selectedValue3;
+        jsonData[currentIndex]['Cup/Disk_Ratio'] = selected_CDR;
+        jsonData[currentIndex]['Image_Quality_Vocab.Name'] = selected_Image_Quality;
+        jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = selected_Diagnosis_Vocab;
         if (showComments) {
             jsonData[currentIndex]['Comments'] = comments;
         } else {
@@ -155,18 +175,18 @@ const DetailsComponent = ({ jsonData }: Props) => {
     }
     //#1-0.8-no
     //#2-0.9-no
-    const handleValue1Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handle_CDR_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValueStr = event.target.value;
         const selectedValue = parseFloat(selectedValueStr);
-        setSelectedValue1(selectedValue);
-        if (element1Ref.current) {
-            console.log("value 1 handle change:\nselectedValue:", selectedValue, "\nref:", element1Ref.current.value);
+        setSelected_CDR(selectedValue);
+        if (Ref_CDR.current) {
+            console.log("value 1 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_CDR.current.value);
         }
 
         // console.log("value1 change:", event.target.value);
 
         const updatedValue3 = selectedValue >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
-        setSelectedValue3(updatedValue3);
+        setSelected_Diagnosis_Vocab(updatedValue3);
         // console.log("value1(", selectedValue, ")updates value3(", selectedValue3, ")");
 
         if ((selectedValue < 0.6 && updatedValue3 === "No Glaucoma") || (selectedValue >= 0.6 && updatedValue3 === "Suspected Glaucoma")) {
@@ -183,11 +203,11 @@ const DetailsComponent = ({ jsonData }: Props) => {
     }
 
     //Image Quality
-    const handleValue2Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handle_Image_Quality_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.value;
-        setSelectedValue2(selectedValue);
-        if (element2Ref.current) {
-            console.log("value 2 handle change:\nselectedValue:", selectedValue, "\nref:", element2Ref.current.value);
+        setSelected_Image_Quality(selectedValue);
+        if (Ref_Image_Quality.current) {
+            console.log("value 2 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Image_Quality.current.value);
 
         }
         // console.log("value2 change:", event.target.value);
@@ -195,18 +215,18 @@ const DetailsComponent = ({ jsonData }: Props) => {
     }
 
     //Diaognosis
-    const handleValue3Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handle_Diagnosis_Vocab_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.value;
-        setSelectedValue3(selectedValue);
+        setSelected_Diagnosis_Vocab(selectedValue);
 
-        if (element3Ref.current) {
-            console.log("value 3 handle change:\nselectedValue:", selectedValue, "\nref:", element3Ref.current.value);
+        if (Ref_Diagnosis_Vocab.current) {
+            console.log("value 3 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Diagnosis_Vocab.current.value);
             // console.log("value3 change:", selectedValue);
         }
 
         // console.log("value3 updates comments(", selectedValue, ")");
-        if (element1Ref.current) {
-            const ref_value = parseFloat(element1Ref.current.value)
+        if (Ref_CDR.current) {
+            const ref_value = parseFloat(Ref_CDR.current.value)
             if ((ref_value >= 0.6 && selectedValue === "No Glaucoma") || (ref_value < 0.6 && selectedValue === "Suspected Glaucoma")) {
                 setShowComments(true);
                 setComments('');
@@ -289,44 +309,45 @@ const DetailsComponent = ({ jsonData }: Props) => {
     //     setSelectedValue1(v)
     //     handleValue1Change({ target: { value: v } as any })
     // }
-    const setValue1AndTrigger = (v: string) => {
-        setSelectedValue1(parseInt(v, 10));
+    const set_CDR_AndTrigger = (v: string) => {
+        setSelected_CDR(parseInt(v, 10));
         const syntheticEvent = {
             target: { value: v },
         } as React.ChangeEvent<HTMLSelectElement>;
-        handleValue1Change(syntheticEvent);
+        handle_CDR_Change(syntheticEvent);
     }
 
-    const setValue2AndTrigger = (v: string) => {
-        setSelectedValue2(v)
+    //Image_Quality Value2
+    const set_Image_Quality_AndTrigger = (v: string) => {
+        setSelected_Image_Quality(v)
         const syntheticEvent = {
             target: { value: v },
         } as React.ChangeEvent<HTMLSelectElement>;
-        handleValue2Change(syntheticEvent)
+        handle_Image_Quality_Change(syntheticEvent)
     }
-    const setValue3AndTrigger = (v: string) => {
-        setSelectedValue3(v)
+    const set_Diagnosis_Vocab_AndTrigger = (v: string) => {
+        setSelected_Diagnosis_Vocab(v)
         const syntheticEvent = {
             target: { value: v },
         } as React.ChangeEvent<HTMLSelectElement>;
-        handleValue3Change(syntheticEvent)
+        handle_Diagnosis_Vocab_Change(syntheticEvent)
     }
 
-    const handle1 = () => { setValue1AndTrigger("0.1") }
-    const handle2 = () => { setValue1AndTrigger("0.2") }
-    const handle3 = () => { setValue1AndTrigger("0.3") }
-    const handle4 = () => { setValue1AndTrigger("0.4") }
-    const handle5 = () => { setValue1AndTrigger("0.5") }
-    const handle6 = () => { setValue1AndTrigger("0.6") }
-    const handle7 = () => { setValue1AndTrigger("0.7") }
-    const handle8 = () => { setValue1AndTrigger("0.8") }
-    const handle9 = () => { setValue1AndTrigger("0.9") }
+    const handle1 = () => { set_CDR_AndTrigger("0.1") }
+    const handle2 = () => { set_CDR_AndTrigger("0.2") }
+    const handle3 = () => { set_CDR_AndTrigger("0.3") }
+    const handle4 = () => { set_CDR_AndTrigger("0.4") }
+    const handle5 = () => { set_CDR_AndTrigger("0.5") }
+    const handle6 = () => { set_CDR_AndTrigger("0.6") }
+    const handle7 = () => { set_CDR_AndTrigger("0.7") }
+    const handle8 = () => { set_CDR_AndTrigger("0.8") }
+    const handle9 = () => { set_CDR_AndTrigger("0.9") }
 
-    const handleG = () => { setValue2AndTrigger("Good") }
-    const handleB = () => { setValue2AndTrigger("Bad") }
+    const handleG = () => { set_Image_Quality_AndTrigger("Good") }
+    const handleB = () => { set_Image_Quality_AndTrigger("Bad") }
 
-    const handleW = () => { setValue3AndTrigger("No Glaucoma") }
-    const handleS = () => { setValue3AndTrigger("Suspected Glaucoma") }
+    const handleW = () => { set_Diagnosis_Vocab_AndTrigger("No Glaucoma") }
+    const handleS = () => { set_Diagnosis_Vocab_AndTrigger("Suspected Glaucoma") }
 
     const handlers = {
         CTRL_N: handleCtrlN,
@@ -384,8 +405,9 @@ const DetailsComponent = ({ jsonData }: Props) => {
                             <tr key="Cup/Disk_Ratio">
                                 <td>Cup/Disk_Ratio</td>
                                 <td>
-                                    <select className='chaise-input-group' value={selectedValue1} onChange={handleValue1Change} ref={element1Ref}>
-                                        {dropdown1.map((option) => (
+                                    <select className='chaise-input-group' value={selected_CDR} onChange={handle_CDR_Change} ref={Ref_CDR}>
+                                        <option value="empty">- null -</option>
+                                        {CDR_list.map((option) => (
                                             <option key={option} value={option}>
                                                 {/* {option === selectedValue2 ? `${option}` : option} */}
                                                 {option}
@@ -399,10 +421,11 @@ const DetailsComponent = ({ jsonData }: Props) => {
                             <tr key="Diagnosis">
                                 <td>Diagnosis</td>
                                 <td>
-                                    <select className='chaise-input-group' value={selectedValue3} onChange={handleValue3Change} ref={element3Ref}>
-                                        {dropdown3.map((option) => (
-                                            <option key={option} value={option}>
-                                                {option}
+                                    <select className='chaise-input-group' value={selected_Diagnosis_Vocab} onChange={handle_Diagnosis_Vocab_Change} ref={Ref_Diagnosis_Vocab}>
+                                        <option value="empty">- null -</option>
+                                        {Image_Quality.map((option) => (
+                                            <option key={option.RID} value={option.RID}>
+                                                {option.Name}
                                             </option>
                                         ))}
                                     </select>
@@ -412,10 +435,11 @@ const DetailsComponent = ({ jsonData }: Props) => {
                             <tr key="Image_Quality">
                                 <td>Image_Quality</td>
                                 <td>
-                                    <select className='chaise-input-group' value={selectedValue2} onChange={handleValue2Change} ref={element2Ref}>
-                                        {dropdown2.map((option) => (
-                                            <option key={option} value={option}>
-                                                {option}
+                                    <select className='chaise-input-group' value={selected_Image_Quality} onChange={handle_Image_Quality_Change} ref={Ref_Image_Quality}>
+                                        <option value="empty">- null -</option>
+                                        {Image_Quality.map((option) => (
+                                            <option key={option.RID} value={option.RID}>
+                                                {option.Name}
                                             </option>
                                         ))}
                                     </select>
