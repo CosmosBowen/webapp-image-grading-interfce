@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import DetailsComponent from './detail-hotkey';
-// import DetailsComponent from './detial-hotkey-not-working';
+// import DetailsComponent from './detail-hotkey';
+import DetailsComponent from './detial-hotkey-not-working';
 
 const host = window.location.host;
 // const host_url = host.split('.')[0];
@@ -200,8 +200,8 @@ const UrlReaderComponent = () => {
             {jsonData && jsonData.length > 0 && Image_Quality && Array.isArray(Image_Quality) && Diagnosis_Vocab && Array.isArray(Diagnosis_Vocab) &&
                 (
                     <>
-                        {/* <DetailsComponent jsonData={jsonData} Image_Quality={Image_Quality} Diagnosis_Vocab={Diagnosis_Vocab} /> */}
-                        <DetailsComponent jsonData={jsonData} />
+                        <DetailsComponent jsonData={jsonData} Image_Quality={Image_Quality} Diagnosis_Vocab={Diagnosis_Vocab} />
+                        {/* <DetailsComponent jsonData={jsonData} /> */}
                         <a ref={downloadLinkRef} style={{ display: 'none' }}>Download</a>
                     </>
 
