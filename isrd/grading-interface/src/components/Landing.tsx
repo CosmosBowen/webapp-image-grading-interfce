@@ -91,8 +91,8 @@ const UrlReaderComponent = () => {
         setSelectedTag(diagnosis_rid);
         console.log("choose:", diagnosis_rid);
         if (diagnosis_rid !== "empty") {
-            // const data_url = 'http://localhost:8080/data';
-            const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`;
+            const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Diagnosis:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image,Diagnosis:Process,Diagnosis:Diagnosis_Status,Diagnosis:Diagnosis_Vocab,Diagnosis:Comments`;
+            // const data_url = `https://${host}/ermrest/catalog/eye-ai/attribute/Subject_Dataset:=eye-ai:Subject_Dataset/Dataset=${dataset_rid}/Subject:=left(Subject)=(eye-ai:Subject:RID)/Observation:=left(RID)=(eye-ai:Observation:Subject)/Image:=left(RID)=(eye-ai:Image:Observation)/Diagnosis:=left(RID)=(eye-ai:Diagnosis:Image)/Diagnosis_Tag=${diagnosis_rid}/Image_RID:=Image:RID,Image:URL,Image:Filename,Image:Length,Image:Image,Image:Image_Quality_Vocab,Diagnosis:Cup%2FDisk_Ratio,Diagnosis_RID:=Diagnosis:RID,Diagnosis_Image_RID:=Diagnosis:Image`;
             console.log("generate url:", data_url);
 
             const fetchData = async () => {
