@@ -100,11 +100,11 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
     useEffect(() => {
 
         console.log("#NOW ", currentIndex);
-        console.log("#1:", jsonData[currentIndex]['Cup/Disk_Ratio'])
-        console.log("#2:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
-        console.log("#3:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
-        console.log("#4:", jsonData[currentIndex]['Comments'])
-        console.log("#5:", showComments)
+        console.log("CDR:", jsonData[currentIndex]['Cup/Disk_Ratio'])
+        console.log("Image_Quality:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
+        console.log("Diagnosis_Vocab:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
+        console.log("Comments", jsonData[currentIndex]['Comments'])
+        console.log("showComments:", showComments)
 
         // console.log("initiate new object");
         setImageUrl(currentObject['URL']);
@@ -176,20 +176,21 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
     //#1-0.8-no
     //#2-0.9-no
     const handle_CDR_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValueStr = event.target.value;
-        const selectedValue = parseFloat(selectedValueStr);
-        setSelected_CDR(selectedValue);
+        const CDR_Str = event.target.value;
+        const CDR = parseFloat(CDR_Str);
+        setSelected_CDR(CDR);
         if (Ref_CDR.current) {
-            console.log("value 1 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_CDR.current.value);
+            console.log("choose <CDR>:", CDR);
+            // console.log("value 1 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_CDR.current.value);
         }
 
         // console.log("value1 change:", event.target.value);
 
-        const updatedValue3 = selectedValue >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
-        setSelected_Diagnosis_Vocab(updatedValue3);
+        const updated_Diagnosis_Vocab = CDR >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
+        setSelected_Diagnosis_Vocab(updated_Diagnosis_Vocab);
         // console.log("value1(", selectedValue, ")updates value3(", selectedValue3, ")");
 
-        if ((selectedValue < 0.6 && updatedValue3 === "No Glaucoma") || (selectedValue >= 0.6 && updatedValue3 === "Suspected Glaucoma")) {
+        if ((CDR < 0.6 && updated_Diagnosis_Vocab === "No Glaucoma") || (CDR >= 0.6 && updated_Diagnosis_Vocab === "Suspected Glaucoma")) {
             console.log("no comments.")
             setComments('');
             setShowComments(false);
@@ -204,30 +205,30 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
     //Image Quality
     const handle_Image_Quality_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = event.target.value;
-        setSelected_Image_Quality(selectedValue);
+        const Image_Quality_RID = event.target.value;
+        setSelected_Image_Quality(Image_Quality_RID);
         if (Ref_Image_Quality.current) {
-            console.log("value 2 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Image_Quality.current.value);
+            console.log("choose <Image_Quality>:", Image_Quality_RID);
+            // console.log("value 2 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Image_Quality.current.value);
 
         }
-        // console.log("value2 change:", event.target.value);
 
     }
 
     //Diaognosis
     const handle_Diagnosis_Vocab_Change = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = event.target.value;
-        setSelected_Diagnosis_Vocab(selectedValue);
+        const Diagnosis_Vocab_RID = event.target.value;
+        setSelected_Diagnosis_Vocab(Diagnosis_Vocab_RID);
 
         if (Ref_Diagnosis_Vocab.current) {
-            console.log("value 3 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Diagnosis_Vocab.current.value);
-            // console.log("value3 change:", selectedValue);
+            console.log("choose <Diagnosis_Vocab>:", Diagnosis_Vocab_RID);
+            // console.log("value 3 handle change:\nselectedValue:", selectedValue, "\nref:", Ref_Diagnosis_Vocab.current.value);
+
         }
 
-        // console.log("value3 updates comments(", selectedValue, ")");
         if (Ref_CDR.current) {
-            const ref_value = parseFloat(Ref_CDR.current.value)
-            if ((ref_value >= 0.6 && selectedValue === "No Glaucoma") || (ref_value < 0.6 && selectedValue === "Suspected Glaucoma")) {
+            const value_Ref_CDR = parseFloat(Ref_CDR.current.value)
+            if ((value_Ref_CDR >= 0.6 && Diagnosis_Vocab_RID === "No Glaucoma") || (value_Ref_CDR < 0.6 && Diagnosis_Vocab_RID === "Suspected Glaucoma")) {
                 setShowComments(true);
                 setComments('');
             } else {
@@ -423,7 +424,7 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
                                 <td>
                                     <select className='chaise-input-group' value={selected_Diagnosis_Vocab} onChange={handle_Diagnosis_Vocab_Change} ref={Ref_Diagnosis_Vocab}>
                                         <option value="empty">- null -</option>
-                                        {Image_Quality.map((option) => (
+                                        {Diagnosis_Vocab.map((option) => (
                                             <option key={option.RID} value={option.RID}>
                                                 {option.Name}
                                             </option>
@@ -467,9 +468,14 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
                     <div className="group">
                         <div className='vertical-items'>
-                            <button className='chaise-btn chaise-btn-primary'>
-                                {currentIndex + 1}/{jsonData.length}
-                            </button>
+                            <div>
+                                <button className='chaise-btn chaise-btn-primary' onClick={showPreviousObject}>{"<"}</button>
+                                <button className='chaise-btn chaise-btn-primary'>
+                                    {currentIndex + 1}/{jsonData.length}
+                                </button>
+                                <button className='chaise-btn chaise-btn-primary' onClick={showNextObject}>{">"}</button>
+                            </div>
+
                             <SliderComponent maxNum={numberMax} onSelect={handleSliderChange} value={currentIndex
                                 + 1} />
                             {/* {isPanelVisible && (
@@ -480,8 +486,7 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
 
 
-                        <button className='chaise-btn chaise-btn-primary' onClick={showPreviousObject}>Previous</button>
-                        <button className='chaise-btn chaise-btn-primary' onClick={showNextObject}>Next</button>
+
 
 
                     </div>
