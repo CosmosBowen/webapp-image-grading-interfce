@@ -128,10 +128,31 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
     };
 
+
+    async function post_put_data(imageData: updateImageData) {
+        try {
+            const data = await saveImageChanges(imageData);
+            console.log("new Function, responseData:\n", data);
+        } catch (error) {
+            console.error("Oops, Error:", error);
+        }
+    }
+
     const saveAndShowData = () => {
-        // jsonData[currentIndex]['Cup/Disk_Ratio'] = element1Ref.current.value;
-        // jsonData[currentIndex]['Image_Quality_Vocab.Name'] = element2Ref.current.value;
-        // jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = element3Ref.current.value;
+
+        const data: updateImageData = {
+            "Cup/Disk_Ratio": "0.9",
+            Image: "8GEJ",
+            Process: "C1NC",
+            Diagnosis_Vocab: "2SKA",
+            Diagnosis_Tag: "C1T4",
+            Diagnosis_Status: "C1SW",
+            Comments: "this is a test 1 Bowen"
+        };
+
+        post_put_data(data)
+
+
         jsonData[currentIndex]['Cup/Disk_Ratio'] = selected_CDR;
         jsonData[currentIndex]['Image_Quality_Vocab.Name'] = selected_Image_Quality;
         jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = selected_Diagnosis_Vocab;
@@ -477,3 +498,45 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 }
 
 export default DetailsComponent;
+
+
+type updateImageData = {
+    RID?: string,
+    "Cup/Disk_Ratio": string,
+    Image: string,
+    Process: string,
+    Diagnosis_Vocab: string,
+    Diagnosis_Tag: string,
+    Diagnosis_Status: string,
+    Comments: string
+};
+
+async function saveImageChanges(imageData: updateImageData) {
+    const method = imageData.RID ? 'PUT' : 'POST';
+    let url = null;
+    console.log("Now - ", method, "with data:\n", imageData);
+    if (method == 'PUT') { // Update
+        url = `http://localhost:8080/imageData/${imageData.RID}`;
+    } else { // Insert
+        imageData.RID = "5"
+        url = `http://localhost:8080/imageData`;
+    }
+
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(imageData)
+    };
+
+    const response = await fetch(url, options);
+
+    if (response.ok) {
+        const data = await response.json()
+        console.log("response.ok:\n", data)
+        return data;
+    }
+
+    throw new Error('Erro saving image data');
+}
