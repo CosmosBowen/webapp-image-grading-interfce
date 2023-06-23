@@ -61,37 +61,24 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
 
     const [currentIndex, setCurrentIndex] = useState(0);
-    const currentObject = jsonData[currentIndex];
+    // const currentObject = jsonData[currentIndex];
 
-    const [imageUrl, setImageUrl] = useState(currentObject['URL']);
+    const [imageUrl, setImageUrl] = useState(jsonData[currentIndex]['URL']);
     // const [imageUrl, setImageUrl] = useState(currentObject['URL']);
 
 
 
-    const [selected_CDR, setSelected_CDR] = useState(currentObject['Cup/Disk_Ratio']);
-    const [selected_Image_Quality, setSelected_Image_Quality] = useState(currentObject['Image_Quality_Vocab.Name']);
-    const [selected_Diagnosis_Vocab, setSelected_Diagnosis_Vocab] = useState(currentObject['Diagnosis_Image_Vocab.Name']);
+    const [selected_CDR, setSelected_CDR] = useState(jsonData[currentIndex]['Cup/Disk_Ratio']);
+    const [selected_Image_Quality, setSelected_Image_Quality] = useState(jsonData[currentIndex]['Image_Quality_Vocab.Name']);
+    const [selected_Diagnosis_Vocab, setSelected_Diagnosis_Vocab] = useState(jsonData[currentIndex]['Diagnosis_Image_Vocab.Name']);
 
     // const [selectedValue1, setSelectedValue1] = useState(currentObject['Cup/Disk_Ratio']);
     // const [selectedValue2, setSelectedValue2] = useState(currentObject['Image_Quality_Vocab.Name']);
     // const [selectedValue3, setSelectedValue3] = useState(currentObject['Diagnosis_Image_Vocab.Name']);
-    const [comments, setComments] = useState(currentObject['Comments']);
+    const [comments, setComments] = useState(jsonData[currentIndex]['Comments']);
     const [showComments, setShowComments] = useState(
-        (currentObject['Comments'] === undefined || currentObject['Comments'] === '') ? false : true
+        (jsonData[currentIndex]['Comments'] === undefined || jsonData[currentIndex]['Comments'] === '') ? false : true
     )
-
-
-    // console.log("#NOW ", currentIndex);
-    // console.log("#1:", jsonData[currentIndex]['Cup/Disk_Ratio'])
-    // console.log("#2:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
-    // console.log("#3:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
-    // console.log("#4:", jsonData[currentIndex]['Comments'])
-    // console.log("#5:", showComments)
-
-    // if (comments) {
-    // if (jsonData[currentIndex]['Comments']) {
-    //     console.log("4:", jsonData[currentIndex]['Comments'])
-    // }
 
     const [isPanelVisible, setPanelVisibility] = useState(true);
 
@@ -99,7 +86,7 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
     useEffect(() => {
 
-        console.log("#NOW ", currentIndex);
+        console.log("# ", currentIndex);
         console.log("CDR:", jsonData[currentIndex]['Cup/Disk_Ratio'])
         console.log("Image_Quality:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
         console.log("Diagnosis_Vocab:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
@@ -107,31 +94,25 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
         console.log("showComments:", showComments)
 
         // console.log("initiate new object");
-        setImageUrl(currentObject['URL']);
-        // setImageUrl(currentObject['URL']);
-        // console.log("image:", imageUrl);
-        setSelected_CDR(currentObject['Cup/Disk_Ratio']);
-        setSelected_Image_Quality(currentObject['Image_Quality_Vocab.Name']);
-        // console.log("current 1:", currentObject['Cup/Disk_Ratio']);
-        // setSelectedValue3(currentObject['Diagnosis_Image_Vocab.Name']);
-        if (currentObject['Diagnosis_Image_Vocab.Name'] === '') {
-            // console.log("initial value3")
-            const initialValue3 = currentObject['Cup/Disk_Ratio'] >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
-            currentObject['Diagnosis_Image_Vocab.Name'] = initialValue3;
-            setSelected_Diagnosis_Vocab(initialValue3);
-            // console.log("*1:", currentObject['Cup/Disk_Ratio']);
-            // console.log("*3:", initialValue3);
+        setImageUrl(jsonData[currentIndex]['URL']);
+        setSelected_CDR(jsonData[currentIndex]['Cup/Disk_Ratio']);
+        setSelected_Image_Quality(jsonData[currentIndex]['Image_Quality_Vocab.Name']);
+
+        if (jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] === '') {
+            const initial_Diagnosis_Vocab = jsonData[currentIndex]['Cup/Disk_Ratio'] >= 0.6 ? "Suspected Glaucoma" : "No Glaucoma";
+            jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'] = initial_Diagnosis_Vocab;
+            setSelected_Diagnosis_Vocab(initial_Diagnosis_Vocab);
         } else {
-            setSelected_Diagnosis_Vocab(currentObject['Diagnosis_Image_Vocab.Name']);
+            setSelected_Diagnosis_Vocab(jsonData[currentIndex]['Diagnosis_Image_Vocab.Name']);
         }
 
-        if (currentObject['Comments'] === undefined || currentObject['Comments'] === '') {
+        if (jsonData[currentIndex]['Comments'] === undefined || jsonData[currentIndex]['Comments'] === '') {
             setShowComments(false)
         } else {
             setShowComments(true)
-            setComments(currentObject['Comments']);
+            setComments(jsonData[currentIndex]['Comments']);
         }
-    }, [currentObject]);
+    }, [currentIndex]);
 
 
     const showNextObject = () => {
@@ -469,11 +450,11 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
                     <div className="group">
                         <div className='vertical-items'>
                             <div>
-                                <button className='chaise-btn chaise-btn-primary' onClick={showPreviousObject}>{"<"}</button>
+                                <button className='chaise-btn chaise-btn-primary' onClick={showPreviousObject}>{"-"}</button>
                                 <button className='chaise-btn chaise-btn-primary'>
                                     {currentIndex + 1}/{jsonData.length}
                                 </button>
-                                <button className='chaise-btn chaise-btn-primary' onClick={showNextObject}>{">"}</button>
+                                <button className='chaise-btn chaise-btn-primary' onClick={showNextObject}>{"+"}</button>
                             </div>
 
                             <SliderComponent maxNum={numberMax} onSelect={handleSliderChange} value={currentIndex
