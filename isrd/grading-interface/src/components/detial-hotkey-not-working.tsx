@@ -140,14 +140,26 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
 
     const saveAndShowData = () => {
 
+        //POST:insert
+        // const data: updateImageData = {
+        //     "Cup/Disk_Ratio": "0.9",
+        //     Image: "8GEJ",
+        //     Process: "C1NC",
+        //     Diagnosis_Vocab: "2SKA",
+        //     Diagnosis_Tag: "C1T4",
+        //     Diagnosis_Status: "C1SW",
+        //     Comments: "this is a test 1 Bowen"
+        // };
+        //PUT:update
         const data: updateImageData = {
-            "Cup/Disk_Ratio": "0.9",
-            Image: "8GEJ",
-            Process: "C1NC",
-            Diagnosis_Vocab: "2SKA",
-            Diagnosis_Tag: "C1T4",
-            Diagnosis_Status: "C1SW",
-            Comments: "this is a test 1 Bowen"
+            RID: "0",
+            "Cup/Disk_Ratio": "0.5",
+            Image: "1",
+            Process: "2",
+            Diagnosis_Vocab: "3",
+            Diagnosis_Tag: "4",
+            Diagnosis_Status: "5",
+            Comments: "this is a test 2 PUT/update Bowen"
         };
 
         post_put_data(data)
