@@ -92,6 +92,7 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
         console.log("Diagnosis_Vocab:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
         console.log("Comments", jsonData[currentIndex]['Comments'])
         console.log("showComments:", showComments)
+        console.log("-------------------")
 
         // console.log("initiate new object");
         setImageUrl(jsonData[currentIndex]['URL']);
@@ -112,7 +113,7 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
             setShowComments(true)
             setComments(jsonData[currentIndex]['Comments']);
         }
-    }, [currentIndex]);
+    }, [jsonData[currentIndex]]);
 
 
     const showNextObject = () => {
@@ -140,12 +141,15 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
             jsonData[currentIndex]['Comments'] = '';
         }
 
-        console.log("#saved ", currentIndex);
-        console.log("#1:", jsonData[currentIndex]['Cup/Disk_Ratio'])
-        console.log("#2:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
-        console.log("#3:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
-        console.log("#4:", jsonData[currentIndex]['Comments'])
-        console.log("#5:", showComments)
+
+        console.log("Saved! ");
+        console.log("$  ", currentIndex);
+        console.log("CDR:", jsonData[currentIndex]['Cup/Disk_Ratio'])
+        console.log("Image_Quality:", jsonData[currentIndex]['Image_Quality_Vocab.Name'])
+        console.log("Diagnosis_Vocab:", jsonData[currentIndex]['Diagnosis_Image_Vocab.Name'])
+        console.log("Comments", jsonData[currentIndex]['Comments'])
+        console.log("showComments:", showComments)
+        console.log("-------------------")
 
 
         // if (comments) {
@@ -376,12 +380,6 @@ const DetailsComponent = ({ jsonData, Image_Quality, Diagnosis_Vocab }: Props) =
                                         </MapInteractionCSS> */}
                                         <img className="myImage" src={imageUrl} alt='eye-ball' />
                                     </div>
-
-                                    {/* <ThingMap url={imageUrl} /> */}
-
-                                    {/* <ReactImageZoom {...props} alt="Image" class="image-class" scale="1.8" /> */}
-                                    {/* <ImageZoom imageUrl={imageUrl} /> */}
-                                    {/* <img src={imageUrl} alt="Placeholder" class="image-class" /> */}
                                 </td>
                             </tr>
                             <tr key="Cup/Disk_Ratio">
